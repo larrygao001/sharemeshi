@@ -1,5 +1,5 @@
 # sharemeshi
-Sharemeshi is a food sharing platform for home made food lovers. Visit the [official website](https://sharemeshi.com/) to learn more!
+Sharemeshi is a food sharing platform for home made food lovers. Visit our [official website](https://sharemeshi.com/) to learn more!
 
 #### This app is bootstraped by AngularJS.
 
