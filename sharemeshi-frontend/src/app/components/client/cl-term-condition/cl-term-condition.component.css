@@ -1,0 +1,31 @@
+.t-orange{
+    color: #f26522;
+}
+
+.t-orange a{
+    color: #f26522;
+}
+
+.breadcrumb>li+li:before {
+    content: "\f101";
+    font-family: FontAwesome;
+    color: #f26522;
+}
+
+.fa-plus:before{
+    content: "\f068";
+}
+
+.collapsed .fa-plus:before{
+    content: "\f067";
+}
+
+:host ::ng-deep .panel-body a{
+    color: #f36461 !important; 
+    font-size: 14px  !important;
+}
+
+#something-sell {
+    background-image: none;
+    background-color: #147aba;
+}

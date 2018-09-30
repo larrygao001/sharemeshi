@@ -1,0 +1,178 @@
+<section id="main" class="clearfix category-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>{{'#FoodManagement' | translate}}</li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title">{{'#FoodManagement' | translate}}</h2>
+    </div>
+
+    <div class="category-info">
+      <div class="row">
+        <!-- recommended-ads -->
+        <div class="col-sm-12 col-md-12">
+          <div class="section recommended-ads">
+            <!-- featured-top -->
+            <div class="featured-top">
+              <h4>&nbsp;&nbsp;</h4>
+              <div class="dropdown pull-right">
+
+                <!-- category-change -->
+                <div class="dropdown category-dropdown">
+                  <h5>{{'#Foodsperpage' | translate}}:</h5>
+                  <a style="cursor: pointer;" data-toggle="dropdown">
+                    <span id="mypagesize" class="change-text">5</span>
+                    <i class="fa fa-caret-square-o-down"></i>
+                  </a>
+                  <ul id="mypage_category" class="dropdown-menu category-change">
+                    <li>
+                      <a (click)="setPageSize(5)">5</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(10)">10</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(20)">20</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(30)">30</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- category-change -->
+              </div>
+            </div>
+            <!-- featured-top -->
+
+            <!-- ad-item -->
+            <div [hidden]="paginatedDatas.length != 0" style="text-align: center;">
+              <img src="./assets/frontend/images/emptycart.png" class="img-responsive" style="margin: auto; margin-top: 30px;" />
+              <h3 style="color: #f26522;">{{'#ListEmpty' | translate}}</h3>
+              <h4 style="font-family: 'Ubuntu', sans-serif;
+                        font-weight: normal;
+                        line-height: 1.1;
+                        color: inherit;" >{{'#nolist' | translate}}</h4>
+              <p></p>
+              <button (click)="goToAddFood()" class="btn cartsbtn" 
+                style="padding: 10px; min-width: 150px; background-color: #f26522; color: white; margin-top: 30px;" type="button">{{'#Addyourfood' | translate}}</button>
+            </div>
+            <div *ngFor="let fitem of paginatedDatas" class="mkgfood row">
+              <div class="featured-image col-lg-4 col-md-4 col-sm-4" style="padding: 0px 1px;">
+                <a routerLink="{{'/food-detail/'+fitem.food_item_id}}">
+                  <img *ngIf="fitem.food_images.length == 0" src="assets/img/blank.png" alt="" class="img-respocive">
+                  <img *ngIf="fitem.food_images.length != 0" src="{{serverUrl + '/' +fitem.food_images[0]}}" alt="" class="img-respocive">
+                </a>
+                <a routerLink="{{'/profile/' + fitem.offered_by}}">
+                  <div class="feature-over-person">
+                    <img *ngIf="(fitem.profile_image == '')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-responsive">
+                    <img *ngIf="(fitem.profile_image != '')" src="{{serverUrl + '/' + fitem.profile_image}}" class="img-responsive">
+                  </div>
+                </a>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="mkg-ad-info">
+                  <h3 class="mkg-item-price">¥{{fitem.price}}</h3>
+                  <h4 class="mkg-item-title">
+                    <a routerLink="{{'/food-detail/'+fitem.food_item_id}}">{{fitem.item_name}}</a>
+                  </h4>
+                  <div class="mkg-category">
+                    <span>
+                      <a>{{fitem.category_name}}</a>
+                    </span>
+                  </div>
+                  <div class="mkg-actionbtns">
+                    <span class="actionbtns" (click)="doEditFood(fitem.food_item_id)">
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Edit" | translate}}
+                    </span>
+                    <span *ngIf="fitem.ordered_status == 0" class="actionbtns" (click)="openModal(surebox, fitem.food_item_id)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Delete" | translate}}
+                    </span>
+                  </div>
+                  <!--div style="margin-top: 15px;" *ngIf="fitem.food_ratings!=0">
+                    <rating [(ngModel)]="fitem.food_ratings" [max]="5" [readonly]="true"></rating> &nbsp;&nbsp;<span>({{fitem.food_ratings}})</span>
+                  </div>
+                  <div style="margin-top: 15px;" *ngIf="fitem.food_ratings==0">
+                    {{"#NoReviews" | translate}}
+                  </div-->
+                </div>
+              </div>
+              <div class="ad-meta-mine col-lg-12 col-md-12 col-sm-12">
+                <div class="pull-left" style="padding: 8px;">
+                  <span class="mdate">
+                    {{'#CreatedDate' | translate}} : {{getOnlyDate(fitem.created_at)}}, {{fitem.availability_day | translate}}
+                  </span>
+                </div>
+                <div class="user-option pull-right">
+                  <i class="fa fa-user"></i>&nbsp;
+                  <i>{{'#OfferedBy' | translate}}</i>&nbsp; : &nbsp;&nbsp;{{fitem.nick_name}}&nbsp;&nbsp;
+                </div>
+              </div>
+            </div>
+
+            <!-- pagination  -->
+            <div class="text-center">
+              <ul class="pagination ">
+                <li>
+                  <a (click)="clickedCaret(0)">
+                    <i class="fa fa-backward"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(1)">
+                    <i class="fa fa-chevron-left"></i>
+                  </a>
+                </li>
+                <li *ngFor="let pwidget of paginateWidgets;" [class.active]='paginateActive == pwidget'>
+                  <a (click)="clickedPaginate(pwidget)">{{pwidget}}</a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(2)">
+                    <i class="fa fa-chevron-right"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(3)">
+                    <i class="fa fa-forward"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- pagination  -->
+          </div>
+        </div>
+        <!-- recommended-ads -->
+
+      </div>
+    </div>
+  </div>
+  <!-- container -->
+</section>
+
+<ng-template #surebox>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" area-label="Close" (click)="modalRef.hide()">
+      <span area-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h5 class="dnotification">{{"#DeleteFoodNotify" | translate}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="actionbtns" style="border: none; padding: 5px 30px;" (click)="doDeleteFood(chosedid)">{{"#Yes" | translate}}</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

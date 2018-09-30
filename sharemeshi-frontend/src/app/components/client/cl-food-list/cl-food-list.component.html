@@ -1,0 +1,195 @@
+<section id="main" class="clearfix category-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>{{'#FoodList' | translate}}</li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title">{{'#FoodList' | translate}}</h2>
+    </div>
+    <div class="row">
+      <!-- banner -->
+      <div class="col-sm-12">
+        <div class="banner">
+          <!-- banner-form -->
+          <div class="banner-form banner-form-full">
+            <form action="#">
+              <!-- category-change -->
+              <div class="dropdown category-dropdown">
+                <a data-toggle="dropdown" href="#" (click)="setCategory('', 'Select Category')">
+                  <span id="mycategory" class="change-text">{{"#SelectCategory" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu category-change">
+                  <li>
+                    <a (click)="setCategory('', 'Select Category')">{{"#SelectCategory" | translate}}</a>
+                  </li>
+                  <li *ngFor="let fcitem of food_categories">
+                    <a (click)="setCategory(fcitem.category_id, fcitem.category_name)">{{fcitem.category_name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="dropdown category-dropdown language-dropdown ">
+                <a data-toggle="dropdown" href="#" (click)="setCountry('Japan', 'Japan')">
+                  <span id="mycountry" class="change-text">{{"#SelectCountry" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu  language-change">
+                  <li>
+                    <a (click)="setCountry('', 'Select Country')">{{"#SelectCountry" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Japan', 'Japan')">{{"Japan" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Other', 'Other')">{{"Other" | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <input type="text" class="form-control" [(ngModel)]="finalObj.keyword" name="text" placeholder="Type Your key word">
+              <button class="form-control" value="Search" (click)="doRodFilter()">{{"#Search" | translate}}</button>
+            </form>
+          </div>
+          <!-- banner-form -->
+        </div>
+      </div>
+      <!-- banner -->
+    </div>
+
+    <div class="category-info">
+      <div class="row">
+        <!-- recommended-ads -->
+        <div class="col-sm-12 col-md-12">
+          <div class="section recommended-ads">
+            <!-- featured-top -->
+            <div class="featured-top">
+              <h4>{{'#RecommendedList' | translate}}</h4>
+              <div class="dropdown pull-right">
+
+                <!-- category-change -->
+                <div class="dropdown category-dropdown">
+                  <h5>{{'#Foodsperpage' | translate}}:</h5>
+                  <a style="cursor: pointer;" data-toggle="dropdown">
+                    <span id="mypagesize" class="change-text">5</span>
+                    <i class="fa fa-caret-square-o-down"></i>
+                  </a>
+                  <ul id="mypage_category" class="dropdown-menu category-change">
+                    <li>
+                      <a (click)="setPageSize(5)">5</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(10)">10</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(20)">20</a>
+                    </li>
+                    <li>
+                      <a (click)="setPageSize(30)">30</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- category-change -->
+              </div>
+            </div>
+            <!-- featured-top -->
+
+            <!-- ad-item -->
+            <div *ngFor="let fitem of paginatedDatas" class="mkgfood row">
+              <div class="featured-image col-lg-4 col-md-4 col-sm-4" style="padding: 0px 1px;">
+                <a routerLink="{{'/food-detail/'+fitem.food_item_id}}">
+                  <img *ngIf="fitem.food_images.length == 0" src="assets/img/blank.png" alt="" class="img-respocive">
+                  <img *ngIf="fitem.food_images.length != 0" src="{{serverUrl + '/' +fitem.food_images[0]}}" alt="" class="img-respocive">
+                </a>
+                <a routerLink="{{'/profile/' + fitem.offered_by}}">
+                  <div class="feature-over-person">
+                    <img *ngIf="(fitem.profile_image == '')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-responsive">
+                    <img *ngIf="(fitem.profile_image != '')" src="{{serverUrl + '/' + fitem.profile_image}}" class="img-responsive">
+                  </div>
+                </a>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="mkg-ad-info">
+                  <h3 class="mkg-item-price">¥{{fitem.price}}</h3>
+                  <h4 class="mkg-item-title">
+                    <a routerLink="{{'/food-detail/'+fitem.food_item_id}}">{{fitem.item_name}}</a>
+                  </h4>
+                  <div class="mkg-category">
+                    <span>
+                      <a>{{fitem.category_name}}</a>
+                    </span>
+                  </div>
+                  <div class="mkg-foodstatus">
+                    <span *ngIf="fitem.food_status == 1" class="t_available">
+                      {{getFoodStatusName(fitem.food_status) | translate}}
+                    </span>
+                    <span *ngIf="fitem.food_status == 0" class="t_closed">
+                      {{getFoodStatusName(fitem.food_status) | translate}}
+                    </span>
+                    <span *ngIf="fitem.area != ''" class="mkg-home-category-area mkg-t-orange">{{fitem.area}}</span>
+                  </div>
+                  <!--div style="margin-top: 15px;" *ngIf="fitem.food_ratings!=0">
+                    <rating [(ngModel)]="fitem.food_ratings" [max]="5" [readonly]="true"></rating> &nbsp;&nbsp;<span>({{fitem.food_ratings}})</span>
+                  </div>
+                  <div style="margin-top: 15px;" *ngIf="fitem.food_ratings==0">
+                    {{"#NoReviews" | translate}}
+                  </div-->
+                </div>
+              </div>
+              <div class="ad-meta-mine col-lg-12 col-md-12 col-sm-12">
+                <div class="pull-left" style="padding: 8px;">
+                  <span class="mdate">
+                    {{fitem.date_of_availability}}, {{fitem.availability_day | translate}}
+                  </span>
+                </div>
+                <div class="user-option pull-right">
+                  <i class="fa fa-user"></i>&nbsp;
+                  <i>{{'#OfferedBy' | translate}}</i>&nbsp; : &nbsp;&nbsp;{{fitem.nick_name}}&nbsp;&nbsp;
+                </div>
+              </div>
+            </div>
+
+            <!-- pagination  -->
+            <div class="text-center">
+              <ul class="pagination ">
+                <li>
+                  <a (click)="clickedCaret(0)">
+                    <i class="fa fa-backward"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(1)">
+                    <i class="fa fa-chevron-left"></i>
+                  </a>
+                </li>
+                <li *ngFor="let pwidget of paginateWidgets;" [class.active]='paginateActive == pwidget'>
+                  <a (click)="clickedPaginate(pwidget)">{{pwidget}}</a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(2)">
+                    <i class="fa fa-chevron-right"></i>
+                  </a>
+                </li>
+                <li>
+                  <a (click)="clickedCaret(3)">
+                    <i class="fa fa-forward"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- pagination  -->
+          </div>
+        </div>
+        <!-- recommended-ads -->
+
+      </div>
+    </div>
+  </div>
+  <!-- container -->
+</section>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

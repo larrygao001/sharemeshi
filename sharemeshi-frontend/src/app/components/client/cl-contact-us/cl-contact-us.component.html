@@ -1,0 +1,65 @@
+<section id="" class="clearfix contact-us">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb new-breadcrumb">
+        <li class="t-orange">
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li class="t-orange">
+          <a routerLink="/contact-us">{{'#ContactUs' | translate}}</a>
+        </li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title d-inline-block t-orange">{{'#ContactUs' | translate}}</h2>
+    </div>
+
+    <div class="corporate-info">
+      <div class="row">
+
+        <!-- feedback -->
+        <div class="col-sm-12">
+          <div class="feedback">
+            <h2>{{'#SendusFeedback' | translate}}</h2>
+            <form name="form" (ngSubmit)="contact.form.valid && this.doContact()" #contact="ngForm" validate class="contact-form">
+              <!--input name="_token" type="hidden" value="OhWqDql7nbjn8o2wLXaIddvGF5gmhpknlrWTa4Mc"-->
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group" [ngClass]="{ 'has-error' : contact.submitted && !name.valid }">
+                    <input class="form-control" placeholder="{{'#FName' | translate}}" name="name" type="text" [(ngModel)]="tmodel.name" #name="ngModel" required autofocus>
+                    <div *ngIf="contact.submitted && !name.valid " class="help-block">{{'#FNameReq' | translate}}</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [ngClass]="{ 'has-error' : contact.submitted && !email.valid }">
+                    <input class="form-control" placeholder="{{'#FEmail' | translate}}" name="email" type="email" [(ngModel)]="tmodel.email" #email="ngModel" required autofocus>
+                    <div *ngIf="contact.submitted && !email.valid " class="help-block">{{'#FEmailReq' | translate}}</div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group" [ngClass]="{ 'has-error' : contact.submitted && !subject.valid }">
+                    <input class="form-control" placeholder="{{'#FSubject' | translate}}" name="subject" type="text" [(ngModel)]="tmodel.subject" #subject="ngModel" required autofocus>
+                    <div *ngIf="contact.submitted && !subject.valid " class="help-block">{{'#FSubjectReq' | translate}}</div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="form-group" [ngClass]="{ 'has-error' : contact.submitted && !message.valid }">
+                    <textarea class="form-control" placeholder="{{'#FMessage' | translate}}" rows="7" name="message" cols="50" [(ngModel)]="tmodel.message" #message="ngModel" required autofocus></textarea>
+                    <div *ngIf="contact.submitted && !message.valid " class="help-block">{{'#FMessageReq' | translate}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn">{{'#FSubmitMsg' | translate}}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- feedback -->
+      </div>
+      <!-- row -->
+    </div>
+  </div>
+  <!-- container -->
+</section>

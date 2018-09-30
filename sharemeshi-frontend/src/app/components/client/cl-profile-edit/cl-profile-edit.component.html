@@ -1,0 +1,289 @@
+<section id="" class="clearfix user-page">
+  <div class="container">
+    <div class="row text-center">
+      <!-- user-register -->
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{'#ProfileEdit' | translate}}</h2>
+          <!-- form -->
+          <form name="form" (ngSubmit)="updateInfo.form.valid && this.doProfileUpdate()" #updateInfo="ngForm" validate>
+
+            <div style="height:200px;" class="form-group">
+              <label>{{'#Avatar' | translate}}</label>
+              <div style="height: 100%;">
+                <input type="file" class="form-control avatar_input" name="image1" (change)="readUrl($event , 1)" #avatarInput>
+                <img *ngIf="Avatardata.image" [src]="Avatardata.image" class="preview_avatar">
+                <img *ngIf="!Avatardata.image" src="assets/img/blank.png" class="preview_avatar">
+              </div>
+            </div>
+
+            <div style="height:200px;" class="form-group">
+              <label>{{'#BackgroundImage' | translate}}</label>
+              <div style="height: 100%;">
+                <input type="file" class="form-control avatar_input" name="bg_image1" (change)="readUrl($event , 2)" #bgInput>
+                <img *ngIf="Bgdata.image" [src]="Bgdata.image" class="preview_avatar">
+                <img *ngIf="!Bgdata.image" src="assets/img/blank.png" class="preview_avatar">
+              </div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !name.valid }">
+              <label>{{'#YourName' | translate}} *</label>
+              <p>{{'#Reg_NameDesc' | translate}}</p>
+              <input placeholder="{{'#Reg_NamePlaceholder' | translate}}" type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel"
+                required>
+              <div *ngIf="updateInfo.submitted && !name.valid" class="help-block">{{'#YourNameRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group">
+              <label>{{'#NickName' | translate}}</label>
+              <input disabled placeholder="Enter Nick Name" type="text" class="form-control" name="nick_name" [(ngModel)]="model.nick_name" #nick_name="ngModel">
+              <!--div *ngIf="updateInfo.submitted && !nickname.valid" class="help-block">Nick Name is required</div-->
+            </div>
+
+            <div class="form-group">
+              <label>{{'#Password' | translate}}</label>
+              <input placeholder="{{'#EnterPassword' | translate}}" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel">
+              <!--div *ngIf="updateInfo.submitted && !password.valid" class="help-block">Password is required</div-->
+            </div>
+
+            <div class="form-group">
+              <label>{{'#PasswordConfirmation' | translate}}</label>
+              <input placeholder="{{'#EnterPasswordConfirm' | translate}}" type="password" class="form-control" name="password_confirmation" [(ngModel)]="model.password_confirmation"
+                #password_confirmation="ngModel">
+              <!--div *ngIf="updateInfo.submitted && !password_confirm.valid" class="help-block">Password Confirm is required</div-->
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !type.valid }">
+              <label>{{'#UserType' | translate}} *</label>
+              <select class="form-control" name="type" [(ngModel)]="model.type" (change)="onChangeUserType($event.target.value)"
+                #type="ngModel" required>
+                <option value="">--{{'#ChooseType' | translate}}--</option>
+                <option *ngFor="let itype of r_usertype" value="{{itype.id}}">{{itype.value | translate}}</option>
+              </select>
+              <div *ngIf="updateInfo.submitted && !type.valid" class="help-block">{{'#UTRequired' | translate}}</div>
+
+              <!--div class="reason" [hidden]="reasonflag == ''">
+
+                <label for="reason2" class="col-md-4 control-label">
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">Reason why you want to use share map (multiple selections possible)</font>
+                  </font>
+                </label>
+                <div class="col-md-8 buyer" [hidden]="reasonflag != 0">
+                  <label *ngFor="let ireason of r_reason" id="{{ireason.id}}">
+                    <input (change)="onChangeReason(ireason.id, $event.target.checked)" *ngIf="(ireason.id>=0 && ireason.id<=5) || ireason.id==12"
+                      class="check" type="checkbox" value="{{ireason.id}}" >
+                    <span *ngIf="(ireason.id>=0 && ireason.id<=5) || ireason.id==12 " class="register-checktext">{{ireason.value}}</span>
+                  </label>
+                </div>
+                <div class="col-md-8 seller" [hidden]="reasonflag != 1">
+                  <label *ngFor="let ireason of r_reason" id="{{ireason.id}}">
+                    <input (change)="onChangeReason(ireason.id, $event.target.checked)" *ngIf="(ireason.id>=6 && ireason.id<=11) || ireason.id==12"
+                      class="check" type="checkbox" value="{{ireason.id}}" >
+                    <span *ngIf="(ireason.id>=6 && ireason.id<=11) || ireason.id==12 " class="register-checktext">{{ireason.value}}</span>
+                  </label>
+                </div>
+
+              </div-->
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !phone_number.valid }">
+              <label>{{'#PhoneNumber' | translate}} *</label>
+              <p>{{'#Reg_PhoneNumDesc' | translate}}</p>
+              <input placeholder="09012345678" type="text" class="form-control" name="phone_number" [(ngModel)]="model.phone_number" #phone_number="ngModel"
+                required>
+              <div *ngIf="updateInfo.submitted && !phone_number.valid" class="help-block">{{'#PNRequired' | translate}}</div>
+            </div>
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !address.valid }">
+              <label>{{'#Address' | translate}} *</label>
+              <p>{{'#Reg_AddressDesc' | translate}}</p>
+              <input placeholder="{{'#Reg_AddressPlaceholder' | translate}}" name="address" [(ngModel)]="model.address" #address="ngModel" autocorrect="off" autocapitalize="off"
+                spellcheck="off" type="text" class="form-control" #search required>
+              <div *ngIf="updateInfo.submitted && !address.valid" class="help-block">{{'#ADRequired' | translate}}</div>
+            </div-->
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !profile_message.valid }">
+              <label>Profile Message *</label>
+              <textarea placeholder="Enter Message From ShareMeshi" type="text" class="form-control" name="profile_message" [(ngModel)]="model.profile_message" #profile_message="ngModel" required></textarea>
+              <div *ngIf="updateInfo.submitted && !profile_message.valid" class="help-block" style="margin-top: 10px;">Profile Message is required</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !age.valid }">
+              <label>Age *</label>
+              <select class="form-control" name="age" [(ngModel)]="model.age" #age="ngModel" required>
+                <option value="">--Please Select Age--</option>
+                <option *ngFor="let iage of r_age" value="{{iage.id}}">{{iage.value}}</option>
+              </select>
+              <div *ngIf="updateInfo.submitted && !age.valid" class="help-block">Age is required</div>
+            </div-->
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !zipcode.valid }">
+              <label>{{'#Zipcode' | translate}} *</label>
+              <p>{{'#Reg_ZipcodeDesc' | translate}}</p>
+              <input placeholder="104-0661" type="text" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" #zipcode="ngModel"
+                required>
+              <div *ngIf="updateInfo.submitted && !zipcode.valid" class="help-block">{{'#ZCRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !prefecture.valid }">
+              <label>{{'#Prefecture' | translate}} *</label>
+              <p>{{'#Reg_PrefectureDesc' | translate}}</p>
+              <input placeholder="{{'#Reg_PrefPlaceholder' | translate}}" type="text" class="form-control" name="prefecture" [(ngModel)]="model.prefecture"
+                #prefecture="ngModel" required>
+              <div *ngIf="updateInfo.submitted && !prefecture.valid" class="help-block">{{'#PFRequired' | translate}}</div>
+            </div>
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !prefectures.valid }">
+              <label>Prefectures *</label>
+              <input placeholder="Enter Prefectures" type="text" class="form-control" name="prefectures" [(ngModel)]="model.prefectures" #prefectures="ngModel" required>
+              <div *ngIf="updateInfo.submitted && !prefectures.valid" class="help-block">Prefectures is required</div>
+            </div-->
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !municipality.valid }">
+              <label>{{'#Municipality' | translate}} *</label>
+              <input placeholder="{{'#Reg_MuniPlaceholder' | translate}}" type="text" class="form-control" name="municipality" [(ngModel)]="model.municipality"
+                #municipality="ngModel" required>
+              <div *ngIf="updateInfo.submitted && !municipality.valid" class="help-block">{{'#MCRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !another_address.valid }">
+              <label>{{'#Reg_AnotherAddress' | translate}} *</label>
+              <p>{{'#Reg_AADesc' | translate}}</p>
+              <input type="text" class="form-control" name="another_address" [(ngModel)]="model.another_address" #another_address="ngModel"
+                required>
+              <div *ngIf="updateInfo.submitted && !another_address.valid" class="help-block">{{'#Reg_AARequired' | translate}}</div>
+            </div>
+            
+            <div class="form-group">
+              <label>{{'#Reg_BN' | translate}}</label>
+              <p>{{'#Reg_BNDesc' | translate}}</p>
+              <input type="text" class="form-control" name="building_nn" [(ngModel)]="model.building_nn" #building_nn="ngModel">
+            </div>
+
+            <div class="form-group">
+              <label>{{'#VideoLink' | translate}}</label>
+              <textarea type="text" class="form-control" name="video_link" [(ngModel)]="model.video_link" #video_link="ngModel"></textarea>
+              <div *ngIf="updateInfo.submitted && !video_link.valid" class="help-block">{{'VideoLinkRequired' | translate}}</div>
+            </div>
+            
+          <!--div class="form-group">
+              <label>{{'#Description' | translate}}</label>
+              <textarea placeholder="Tell us something about user" type="text" class="form-control" name="description" [(ngModel)]="model.description"
+                #description="ngModel"></textarea>
+              <div *ngIf="updateInfo.submitted && !description.valid" class="help-block" style="margin-top: 10px;">{{'#DescriptionRequired' | translate}}</div>
+            </div-->
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !gender.valid }">
+              <label>{{'#Gender' | translate}} *</label>
+              <p>{{'#Reg_GenderDesc' | translate}}</p>
+              <select class="form-control" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+                <option value="">--{{'#ChooseGender' | translate}}--</option>
+                <option *ngFor="let igender of r_gender" value="{{igender.id}}">{{igender.value | translate}}</option>
+              </select>
+              <div *ngIf="updateInfo.submitted && !gender.valid" class="help-block">{{'#GenderRequired' | translate}}</div>
+            </div>
+
+            <div *ngIf="model.type != 1" class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !deliverable_area.valid }">
+              <label>{{'#DeliverablePlace' | translate}} *</label>
+              <input placeholder="{{'#EnterDeliverablePlace' | translate}}" type="text" class="form-control" name="deliverable_area" [(ngModel)]="model.deliverable_area"
+                #deliverable_area="ngModel" required>
+              <div *ngIf="updateInfo.submitted && !deliverable_area.valid" class="help-block">{{'#DPRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !profession.valid }">
+              <label>{{'#Job' | translate}} *</label>
+              <p>{{'#Reg_JobDesc' | translate}}</p>
+              <select class="form-control" name="profession" [(ngModel)]="model.profession" #profession="ngModel" required>
+                <option value="">--{{'#SelectJob' | translate}}--</option>
+                <option *ngFor="let ipro of r_profession" value="{{ipro.id}}">{{ipro.value | translate}}</option>
+              </select>
+              <div *ngIf="updateInfo.submitted && !profession.valid" class="help-block">{{'#JobRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !user_introduction.valid }">
+              <label>{{'#UserIntroduction' | translate}} *</label>
+              <p>{{'#Reg_UserIntroDesc' | translate}}</p>
+              <textarea style="height: 100px;" placeholder="{{'#Reg_IntroPlaceholder' | translate}}" type="text" class="form-control" name="user_introduction"
+                [(ngModel)]="model.user_introduction" #user_introduction="ngModel" required></textarea>
+              <div *ngIf="updateInfo.submitted && !user_introduction.valid" class="help-block" style="margin-top: 10px;">{{'#UIRequired' | translate}}</div>
+            </div>
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !image.valid }">
+              <label>Image *</label>
+              <input type="file" class="form-control" name="image" [(ngModel)]="model.image" #image="ngModel" required='required' [requiredErrorMsg]="'Image1 is required'">
+              <div *ngIf="updateInfo.submitted && !image.valid" class="help-block">image is required</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': updateInfo.submitted && !status.valid }">
+              <label>Status *</label>
+              <select class="form-control" name="status" [(ngModel)]="model.status" #status="ngModel" required>
+                <option value="">--Select A Status--</option>
+                <option *ngFor="let istatus of r_status" value="{{istatus.id}}">{{istatus.value}}</option>
+              </select>
+              <div *ngIf="updateInfo.submitted && !status.valid" class="help-block">Status is required</div>
+            </div-->
+
+
+            <button type="submit" class="btn" style="width: 100%;">{{'#Submit' | translate}}</button>
+          </form>
+        </div>
+      </div>
+      <!-- user-register -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>
+<!-- register-page -->
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title pull-left">{{"#ImageCrop" | translate}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img-cropper #cropper [image]="Avatardata" [settings]="AvatarcropperSettings"></img-cropper>
+        <p></p>
+        <span class="result rounded" *ngIf="Avatardata.image">
+          <img style="width: 128px; height: 128px;" [src]="Avatardata.image" [width]="AvatarcropperSettings.croppedWidth" [height]="AvatarcropperSettings.croppedHeight">
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button class='btn DoneCrop' data-dismiss="modal">{{"#Done" | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="myBgModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title pull-left">{{"#ImageCrop" | translate}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img-cropper #Bgcropper [image]="Bgdata" [settings]="BgcropperSettings"></img-cropper>
+        <p></p>
+        <span class="result rounded" *ngIf="Bgdata.image">
+          <img style="width: 128px; height: 70px;" [src]="Bgdata.image" [width]="BgcropperSettings.croppedWidth" [height]="BgcropperSettings.croppedHeight">
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button class='btn DoneCrop' data-dismiss="modal">{{"#Done" | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

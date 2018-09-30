@@ -1,0 +1,32 @@
+.boxes-card {
+    box-shadow: 0 2px 40px 1px rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+.news-list-box {
+    margin-bottom: 0;
+    padding: 70px 86px;
+}
+.news-list-title::after {
+    content: '';
+    border: none;
+    margin: 30px auto;
+    display: block;
+    height: 8px;
+    width: 105px;
+    background: #f26522;
+}
+.about-text {
+    color: #888888;
+    margin-bottom: 60px;
+}
+
+@media screen and (max-width: 768px) {
+    .news-list-box {
+        padding: 70px 15px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .news-list-title::after {
+        width: 85px;
+    }
+}

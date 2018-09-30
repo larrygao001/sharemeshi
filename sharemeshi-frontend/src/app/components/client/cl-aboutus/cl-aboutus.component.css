@@ -1,0 +1,32 @@
+.boxes-card {
+    box-shadow: 0 2px 40px 1px rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.about-info {
+    margin-bottom: 45px;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.float-none {
+    float: none;
+}
+
+.about-text {
+    color: #888888;
+}
+
+.about-text-title {
+    margin-bottom: 18px;
+}
+
+.t-black {
+    color: #000 !important;
+}
+
+.about-us-text {
+    font-size: 20px;
+    margin-bottom: 18px;
+}

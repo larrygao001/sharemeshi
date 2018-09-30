@@ -1,0 +1,149 @@
+<section id="" class="clearfix user-page">
+  <div class="container">
+    <div class="row text-center">
+      <!-- user-registerFood -->
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{'#FoodRegister' | translate}}</h2>
+          <!-- form -->
+
+          <form name="form" (ngSubmit)="registerFood.form.valid && this.doPrepare()" #registerFood="ngForm" validate>
+            
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !category_id.valid }">
+              <label>{{'#Category' | translate}} *</label>
+              <select class="form-control" name="category_id" [(ngModel)]="model.category_id" #category_id="ngModel" required>
+                <option value="">--{{'#SelectCategory' | translate}}--</option>
+                <option *ngFor="let cdata of food_categories" value="{{cdata.category_id}}">{{cdata.category_name}}</option>
+              </select>
+              <div *ngIf="registerFood.submitted && !category_id.valid" class="help-block">{{'#CategoryRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !item_name.valid }">
+              <label>{{'#Name' | translate}} *</label>
+              <input placeholder="{{'#EnterName' | translate}}" type="text" class="form-control" name="item_name" [(ngModel)]="model.item_name" #item_name="ngModel" required>
+              <div *ngIf="registerFood.submitted && !item_name.valid" class="help-block">{{'#NameRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !food_description.valid }">
+              <label>{{'#Description' | translate}} *</label>
+              <textarea placeholder="{{'#Description' | translate}}" type="text" class="form-control" name="food_description" [(ngModel)]="model.food_description" #food_description="ngModel" required></textarea>
+              <div style="margin-top: 0px;" *ngIf="registerFood.submitted && !food_description.valid" class="help-block">{{'#DescriptionRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !food_images.valid }">
+              <label>{{'#FoodImages' | translate}} *</label>
+              <input type="file" class="form-control" name="food_images" [(ngModel)]="model.food_images" #food_images="ngModel" (change)="readUrl($event)" #productImages>
+              <div *ngIf="registerFood.submitted && !food_images.valid" class="help-block">{{'#FoodImagesRequired' | translate}}</div>
+            </div>
+
+            <div class="food-image-section">
+              <label>{{'#FoodImagePreview' | translate}}</label>
+              <div class="row">
+                <!--div class="col-md-12 text-right">
+                  <span (click)="saveImg()" class="localsave">{{'#Save' | translate}}</span>
+                </div-->
+                <div class="col-md-12 text-center" style="margin: 15px 0px;">
+                  <img-cropper #Fimagecropper [image]="FimageData" [settings]="FimagecropperSettings"></img-cropper>
+                  <p></p>
+                  <span class="result rounded" *ngIf="FimageData.image">
+                    <img style="width: 128px; height: 70px;" [src]="FimageData.image" [width]="FimagecropperSettings.croppedWidth" [height]="FimagecropperSettings.croppedHeight">
+                  </span>
+                </div>
+                <div *ngFor="let imgitem of fImgSrcArray; let i = index;" class="col-md-3">
+                  <span (click)="removeImg(i)"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                  <img [src]="imgitem" class="pfis"/>
+                </div>
+              </div>
+            </div>
+            <div class="foodbtn-section">
+              <div class="row">
+                <div class="col-md-12">
+                  <div (click)="saveImg()" class="localsave">{{'#Save' | translate}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !date_of_delivery_temp.valid }">
+              <label>{{'#DateDelivery' | translate}} *</label>
+              <input autocomplete="off" class="form-control" name="date_of_delivery_temp" [(ngModel)]="model.date_of_delivery_temp" #date_of_delivery_temp="ngModel" bsDatepicker [bsConfig]="bsConfigdata" required>
+              <div *ngIf="registerFood.submitted && !date_of_delivery_temp.valid" class="help-block">{{'#DateDeliveryRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" style="text-align: right;">
+              <span class="btn" (click)="addSlot()" >{{'#AddSlot' | translate}}</span>
+            </div>
+
+            <div style="height: 130px;" class="slotItem" *ngFor="let titem of model.titems; let i=index" >
+              <span class="closeSlot" (click)="closeSlot(i)">
+                <i class="fa fa-window-close" aria-hidden="true"></i>
+              </span>
+              <div style="float: left; width: 45%;" class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && model.titems[i].start_time_temp=='' }">
+                <label>{{'#StartTime' | translate}} *</label>
+                <input (focusout)="periodTimeChanged(100 + i)" class="form-control" id="{{'startTime' + i}}" name="start_time_{{i}}" [(ngModel)]="model.titems[i].start_time_temp" required>
+                <div *ngIf="registerFood.submitted && model.titems[i].start_time_temp==''" class="help-block">{{'#StartTimeRequired' | translate}}</div>
+              </div>
+              <div style="float: right; width: 45%;" class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && model.titems[i].end_time_temp=='' }">
+                <label>{{'#EndTime' | translate}} *</label>
+                <input (focusout)="periodTimeChanged(200 + i)" class="form-control" id="{{'endTime' + i}}" name="end_time_{{i}}" [(ngModel)]="model.titems[i].end_time_temp" required>
+                <div *ngIf="registerFood.submitted && model.titems[i].end_time_temp==''" class="help-block">{{'#EndTimeRequired' | translate}}</div>
+              </div>
+            </div>
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !start_publication_date_temp.valid }">
+              <label>{{'#StartPublicationDate' | translate}} *</label>
+              <input autocomplete="off" class="form-control" name="start_publication_date_temp" [(ngModel)]="model.start_publication_date_temp"
+                #start_publication_date_temp="ngModel" bsDatepicker [bsConfig]="bsConfigdata" required>
+              <div *ngIf="registerFood.submitted && !start_publication_date_temp.valid" class="help-block">{{'#SPDRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && model.start_publication_time_temp=='' }">
+              <label>{{'#StartPublicationTime' | translate}} *</label>
+              <input (focusout)="publicTimeChanged(0)" class="form-control start_public_time" name="start_publication_time_temp" [(ngModel)]="model.start_publication_time_temp" required>
+              <div *ngIf="registerFood.submitted && model.start_publication_time_temp==''" class="help-block">{{'#SPTRequired' | translate}}</div>
+            </div-->
+            
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !end_publication_date_temp.valid }">
+              <label>{{'#EndPublicationDate' | translate}} *</label>
+              <input autocomplete="off" class="form-control" name="end_publication_date_temp" [(ngModel)]="model.end_publication_date_temp"
+                #end_publication_date_temp="ngModel" bsDatepicker [bsConfig]="bsConfigdata" required>
+              <div *ngIf="registerFood.submitted && !end_publication_date_temp.valid" class="help-block">{{'#EPDRequired' | translate}}</div>
+            </div>
+            
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && model.end_publication_time_temp=='' }">
+              <label>{{'#EndPublicationTime' | translate}} *</label>
+              <input (focusout)="publicTimeChanged(1)" class="form-control end_public_time" name="end_publication_time_temp" [(ngModel)]="model.end_publication_time_temp"
+                required>
+              <div *ngIf="registerFood.submitted && model.end_publication_time_temp==''" class="help-block">{{'#EPTRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group">
+              <label>{{'#DeliverablePlace' | translate}}</label>
+              <input type="text" class="form-control" name="deliverable_area" [(ngModel)]="model.deliverable_area" #deliverable_area="ngModel">
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !quantity.valid }">
+              <label>{{'#Quantity' | translate}} *</label>
+              <input type="number" class="form-control" name="quantity" [(ngModel)]="model.quantity" #quantity="ngModel" required>
+              <div *ngIf="registerFood.submitted && !quantity.valid" class="help-block">{{'#QuantityRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerFood.submitted && !price.valid }">
+              <label>{{'#Price' | translate}} *</label>
+              <input type="number" class="form-control" name="price" [(ngModel)]="model.price" #price="ngModel" required>
+              <div *ngIf="registerFood.submitted && !price.valid" class="help-block">{{'#PriceRequired' | translate}}</div>
+            </div>
+
+            <button type="submit" class="btn">{{'#Submit' | translate}}</button>
+          </form>
+        </div>
+      </div>
+      <!-- user-registerFood -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>
+
+

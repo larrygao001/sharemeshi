@@ -1,0 +1,194 @@
+<section id="main" class="clearfix category-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>{{'#Profile' | translate}}</li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title" style="margin-bottom: 0px;">{{'#Profile' | translate}}</h2>
+      <div class="col-lg-12 col-12 peditbtnright">
+        <button class="btn btn-red" type="button" (click)="goToEditProfile()" style="margin-top: 0px;">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;{{'#EditProfile' | translate}}</button>
+      </div>
+    </div>
+    <div class="category-info">
+      <div class="col-sm-12 col-md-12 text-center profile-box p-0">
+        <div class="recommended-ads">
+          <div class="col-lg-12 col-xs-12 p-0 profilecover-imgs">
+            <div *ngIf="userInfo.cover_image == ''" class="col-lg-12 col-xs-12 profile-section profile-back" style="background-image: url(assets/uploads/profile/cover-image.jpg);">
+            </div>
+            <div *ngIf="userInfo.cover_image != '' && userInfo.cover_image != undefined" class="col-lg-12 col-xs-12 profile-section profile-back" [ngStyle]="{'background-image': 'url(' + base_url + '/' +userInfo.cover_image + ')'}">
+            </div>
+          </div>
+          <div class="col-md-12 nickPicMain">
+            <img *ngIf="(userInfo.image == '') && (userInfo.gender == '0')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-circle profile-images">
+            <img *ngIf="(userInfo.image == '') && (userInfo.gender == '1')" src="assets/uploads/profile/picture/user_picture1520431158.jpeg"
+              class="img-circle profile-images">
+            <img *ngIf="(userInfo.image == '') && (userInfo.gender == '2')" src="assets/uploads/profile/picture/user_picture1520431121.png"
+              class="img-circle profile-images">
+            <img *ngIf="userInfo.image != '' && userInfo.image != undefined" src="{{base_url + '/' +userInfo.image}}"
+              class="img-circle profile-images">
+            <p class="profile-title profile-head-title">
+              <span style="font-size: 14px;">{{'#NickName' | translate}} : </span>{{userInfo.nick_name}}
+            </p>
+          </div>
+          <div *ngIf="userInfo.type != 1" class="col-lg-12 col-12 p-0 profile-deliverable">
+            <div class="col-md-12 float-none profileplace-name">
+                <p class="mb-0 profile-deliverable-area">
+                  <strong *ngIf="userInfo.deliverable_area != ''">{{'#DeliverableArea' | translate}} :</strong>&nbsp;
+                  <span>{{userInfo.deliverable_area}}</span>
+                  <strong *ngIf="userInfo.area != ''" style="margin-left: 30px;">{{"#Area" | translate}} :</strong>&nbsp;
+                  <span>{{userInfo.area}}</span>
+                </p>
+            </div>
+          </div>
+          <!--div *ngIf="userInfo.area != ''" class="col-lg-6 col-6 p-0 profile-deliverable">
+            <div class="col-md-12 float-none profileplace-name">
+              <p class="mb-0 profile-deliverable-area">
+                <strong>Area :</strong>&nbsp;
+                <span>{{userInfo.area}}</span>
+              </p>
+            </div>
+          </div-->
+          
+          <!--div class="col-lg-12 col-12 p-0 profile-description">
+            <div class="col-md-4" id="eachinfo">
+							<p><strong>{{'#Email' | translate}} :</strong><span> {{userInfo.email}}</span></p>
+						</div>
+						<div class="col-md-4" id="eachinfo">
+							<p><strong>{{'#PhoneNo' | translate}} :</strong><span> {{userInfo.phone_number}}</span></p>
+						</div>
+            <div class="col-md-4">
+              <p>
+                <strong>{{'#City' | translate}} :</strong>
+                <span>{{userInfo.municipality}}</span>
+              </p>
+            </div>
+          </div-->
+        </div>
+      </div>
+      <div *ngIf="userInfo.video_link != ''" class="col-sm-12 col-md-12 text-center profile-box section">
+        <h4 class="text-left t-black mt-0">{{'#ShareVideo' | translate}}</h4>
+        <div *ngIf="userInfo.video_link != ''" id="iframe_div">
+        </div>
+        <!--iframe *ngIf="userInfo.video_link != ''" width="100%" height="480" [src]="videoUrl"></iframe-->
+        <div *ngIf="userInfo.video_link == ''">
+           <h4>{{'#NoVideo' | translate}}</h4>
+        </div>
+      </div>
+      <div *ngIf="checkUserType()" class="col-sm-12 col-md-12 text-center profile-box section">
+        <h4 class="text-left t-black mt-0">{{'#Schedule' | translate}}</h4>
+        <div *ngIf="fmdatas.length != 0" class="row" style="margin-top: 30px;">
+          <div *ngFor="let fmitems of fmdatas; let i=index">
+            <div class="clearfix" *ngIf="i % 4 == 0"></div>
+            <div class="col-md-3">
+              <div class="featured">
+                <div class="featured-image">
+                  <a routerLink="{{'/food-detail/' + fmitems.food_item_id}}">
+                    <img *ngIf="fmitems.food_images == '' || fmitems.food_images.length == 0" src="assets/img/blank.png" alt="" class="img-respocive foodcard_fixed">
+                    <img *ngIf="fmitems.food_images != '' && fmitems.food_images.length != 0" src="{{base_url + '/' + fmitems.food_images[0]}}" alt="" class="img-respocive foodcard_fixed">
+                  </a>
+                  <!--a href="#" class="verified" data-toggle="tooltip" data-placement="top" title="Verified"><i class="fa fa-check-square-o"></i></a-->
+                </div>
+                <div class="ad-info">
+                  <h3 class="item-price">&yen;{{fmitems.price}}</h3>
+                  <h4 class="item-title card_truncated">{{fmitems.item_name}}</h4>
+                  <div class="item-cat">
+                    <span>{{fmitems.category_name}}</span>
+                  </div>
+                </div>
+                <div class="ad-meta">
+                  <div class="meta-content">
+                    <span class="dated">{{getFoodStatusName(fmitems.food_status) | translate}}</span>
+                  </div>
+                  <!--div class="user-option pull-right">
+            											<a href="#" data-toggle="tooltip" data-placement="top" title="Los Angeles, USA"><i class="fa fa-map-marker"></i> </a>
+            											<a href="#" data-toggle="tooltip" data-placement="top" title="Individual"><i class="fa fa-suitcase"></i> </a>											
+            								</div-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="fmdatas.length == 0" class="row">
+          <h4>{{'#NoSchedule' | translate}}</h4>
+        </div>
+      </div>
+      <div *ngIf="checkUserType()" class="col-lg-12 col-xs-12 text-center profile-box section">
+        <h4 class="text-left t-black mt-0">{{'#Reviews' | translate}}</h4>
+        <!--div class="col-lg-12 col-xs-12 p-0 review-main-div">
+          <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 p-0">
+            <div class="review-img-div float-left">
+              <img src="assets/frontend/images/Food-creator-sm1.png" class="img-circle review-image"> @endif
+            </div>
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
+            <p class="mb-0 text-left t-black">40, Female</p>
+            <p class="text-left">
+              Awesome<br>
+              This is really great!!!
+            </p>
+          </div>
+        </div-->
+        <div class="col-lg-12">
+          <div *ngFor="let reviewitem of reviewDatas;" class="each_review">
+            <!--
+                      <rating [(ngModel)]="reviewitem.ratings" [max]="5" [readonly]="true"></rating>&nbsp;&nbsp;&nbsp;{{reviewitem.review}}
+                      -->
+            <div class="review_contents">
+              <a class="reviewed_food" routerLink="{{'/food-detail/' + reviewitem.food_id}}">{{reviewitem.food_title}}</a>
+              <p class="review_description">{{reviewitem.review_description}}</p>
+              <div class="rdatepanel">
+                <span style="color: #5d5d5d; font-style: italic;">{{"#reviewedfrom" | translate}} : </span>
+                <span style="color: #f56b2d; font-weight: 700;">{{reviewitem.nick_name}}</span>
+              </div>
+            </div>
+            <div class="rater">
+              <span style="color: #f56b2d; font-weight: 700;">{{reviewitem.date_of_submission}}</span>
+            </div>
+          </div>
+          <div *ngIf="current_rDatas.length!=0" style="text-align: right; margin-top: 20px;">
+            <span (click)="loadReviews()" style="color: #f56b2d; font-weight: 700; cursor: pointer;">{{"#more" | translate}}</span>
+          </div>
+        </div>
+        <div *ngIf="reviewDatas.length==0">
+          <h4>{{'#NoReviews' | translate}}</h4>
+        </div>
+      </div>
+      <div class="col-lg-12 col-xs-12 text-center profile-box section">
+        <h4 class="text-left t-black mt-0">{{'#Introduction' | translate}}</h4>
+        <p *ngIf="userInfo.user_introduction != ''" class="text-left" style="white-space: pre-line;">
+          {{userInfo.user_introduction}}
+        </p>
+        <p *ngIf="userInfo.user_introduction == ''" class="text-left">
+          {{'#NoIntroduction' | translate}}
+        </p>
+      </div>
+      <div class="col-lg-12 col-xs-12 text-center profile-box section">
+        <h4 class="text-left t-black mt-0">{{'#MsgFromSharemeshi' | translate}}</h4>
+        <div class="col-lg-12 col-xs-12 p-0">
+          <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 message-logo-div">
+            <img src="assets/frontend/images/Logo.png" class="img-responsive">
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 p-0">
+            <!--p class="text-left">
+               Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+            </p-->
+            <p *ngIf="userInfo.profile_message == ''" class="text-left">
+              {{'#NoMsgFromSharemeshi' | translate}}
+            </p>
+            <p *ngIf="userInfo.profile_message != ''" class="text-left">
+               {{userInfo.profile_message}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

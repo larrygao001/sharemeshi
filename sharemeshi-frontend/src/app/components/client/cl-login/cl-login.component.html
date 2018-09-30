@@ -1,0 +1,50 @@
+<section id="" class="clearfix user-page">
+  <div class="container">
+    <div class="row text-center">
+      <!-- user-login -->
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{ '#Userlogin' | translate }}</h2>
+          <!-- form -->
+
+          <form style="margin-bottom: 10px;" name="form" (ngSubmit)="login.form.valid && this.doLogin()" #login="ngForm" validate>
+
+            <div class="form-group" [ngClass]="{ 'has-error': login.submitted && !email.valid }">
+              <label>{{ '#Email' | translate }} * </label>
+              <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required autofocus>
+              <div *ngIf="login.submitted && !email.valid" class="help-block">{{ '#EmailRequired' | translate }}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': login.submitted && !password.valid }">
+              <label>{{ '#Password' | translate }} * </label>
+              <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+              <div *ngIf="login.submitted && !password.valid" class="help-block">{{ '#PasswordRequired' | translate }}</div>
+            </div>
+
+            <!-- forgot-password -->
+            <div class="user-option">
+              <div class="checkbox pull-left">
+                <div class="form-group">
+                  <label [class.checked]="model.remember">
+                    <input type="checkbox" class="form-control" name="remember" [(ngModel)]="model.remember" #remember="ngModel"> {{ '#KeepMe' | translate }}
+                  </label>
+                </div>
+              </div>
+              <div class="pull-right forgot-password">
+                <a routerLink="/forgot-password">{{ '#ForgotPw' | translate }}</a>
+              </div>
+            </div>
+            <!-- forgot-password -->
+            <button type="submit" class="btn">{{ '#Login' | translate }}</button>
+          </form>
+          <a [routerLink]="['/register']">{{ '#WannaRegister' | translate }}</a>
+        </div>
+        <!-- <a href="#" class="btn-primary">Create a New Account</a> -->
+      </div>
+      <!-- user-login -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>
+<!-- signin-page -->

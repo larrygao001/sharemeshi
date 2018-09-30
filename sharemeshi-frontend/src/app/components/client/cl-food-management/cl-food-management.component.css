@@ -1,0 +1,110 @@
+.pagination a{
+    cursor: pointer;
+}
+
+.feature-over-person img{
+    width: 70px;
+    height: 70px;
+}
+
+.user-option i.fa-user{
+    font-size: 18px;
+    color: #f36524;
+    margin-top: 8px;
+}
+
+.ad-meta-mine{
+    background-color: #f6f6f6;
+    border-top: 1px solid #eeeeee;
+    min-height: 35px;
+}
+
+.mdate{
+    font-weight: 500;
+    color: #9fa4a4;
+}
+
+.mkgfood{
+    border: solid 1px #f3f3f3;
+    margin: 0px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.mkg-ad-info{
+    padding: 20px 15px;
+}
+
+.mkg-item-price{
+    margin-bottom: 15px;
+    color: black;
+    font-size: 30px;
+}
+
+.mkg-item-title a{
+    color: #f26522;
+    font-size: 25px;
+}
+
+.mkg-category{
+    margin-top: 15px;
+}
+
+.mkg-category a{
+    color: #a0a0a0;
+    font-size: 18px;
+    line-height: 17px;
+    margin-top: 10px;
+}
+
+#accordion-one a{
+    cursor: pointer;
+}
+
+.dropdown li a{
+    cursor: pointer;
+}
+
+#mypage_category a{
+    cursor: pointer;
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+rating{
+    color: #f36524;
+    font-size: 20px;
+}
+
+.mkg-actionbtns{
+    text-align: right;
+    margin-top: 30px;
+}
+
+.actionbtns{
+    background-color: #f36524;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.actionbtns:hover{
+    background-color: #0072bc;
+    color: #fff;
+}
+
+.dnotification{
+    font-size: 17px;
+    color: #f36524;
+}

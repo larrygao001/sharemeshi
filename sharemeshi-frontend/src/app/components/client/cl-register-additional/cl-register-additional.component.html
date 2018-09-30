@@ -1,0 +1,107 @@
+<section id="" class="clearfix user-page">
+  <div class="container">
+    <div class="row text-center">
+      <!-- user-register -->
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{'#UserRegister' | translate}}</h2>
+          <!-- form -->
+          <form name="form" (ngSubmit)="register.form.valid && this.doRegister()" #register="ngForm" validate>
+
+            <div style="height:200px;" class="form-group">
+              <label>{{'#Avatar' | translate}}</label>
+              <div style="height: 100%;">
+                <input type="file" class="form-control avatar_input" name="image1" (change)="readUrl($event , 1)" #avatarInput>
+                <img *ngIf="Avatardata.image" [src]="Avatardata.image" class="preview_avatar">
+                <img *ngIf="!Avatardata.image" src="assets/img/blank1.png" class="preview_avatar">
+              </div>
+            </div>
+
+            <div style="height:200px;" class="form-group">
+              <label>{{'#BackgroundImage' | translate}}</label>
+              <div style="height: 100%;">
+                <input type="file" class="form-control avatar_input" name="bg_image1" (change)="readUrl($event , 2)" #bgInput>
+                <img *ngIf="Bgdata.image" [src]="Bgdata.image" class="preview_avatar">
+                <img *ngIf="!Bgdata.image" src="assets/img/blank1.png" class="preview_avatar">
+              </div>
+            </div>
+
+            <div *ngIf="utype == 0" class="form-group" [ngClass]="{ 'has-error': register.submitted && !deliverable_area.valid }">
+              <label>{{'#DeliverablePlace' | translate}} *</label>
+              <p>{{'#DeliverablePlaceDesc' | translate}}</p>
+              <input placeholder="{{'#EnterDeliverablePlace' | translate}}" type="text" class="form-control" name="deliverable_area" [(ngModel)]="model.deliverable_area"
+                #deliverable_area="ngModel" required>
+              <div *ngIf="register.submitted && !deliverable_area.valid" class="help-block">{{'#DPRequired' | translate}}</div>
+            </div>
+
+            <!--div class="form-group" [ngClass]="{ 'has-error': register.submitted && !profile_message.valid }">
+              <label>{{'#ProfileMessage' | translate}} *</label>
+              <input placeholder="Enter Profile Message" type="text" class="form-control" name="profile_message" [(ngModel)]="model.profile_message"
+                #profile_message="ngModel" required>
+              <div *ngIf="register.submitted && !profile_message.valid" class="help-block">{{'#PMRequired' | translate}}</div>
+            </div-->
+
+            <button type="submit" class="btn" style="width: 100%;">{{'#Submit' | translate}}</button>
+            <p></p>
+            <span class="btn yard" (click)="goToLogin()" style="width: 100%;">{{'#Skip' | translate}}</span>
+          </form>
+        </div>
+      </div>
+      <!-- user-register -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>
+<!-- register-page -->
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title pull-left">{{"#ImageCrop" | translate}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img-cropper #cropper [image]="Avatardata" [settings]="AvatarcropperSettings"></img-cropper>
+        <p></p>
+        <span class="result rounded" *ngIf="Avatardata.image">
+          <img style="width: 128px; height: 128px;" [src]="Avatardata.image" [width]="AvatarcropperSettings.croppedWidth" [height]="AvatarcropperSettings.croppedHeight">
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button class='btn DoneCrop' data-dismiss="modal">{{"#Done" | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="myBgModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title pull-left">{{"#ImageCrop" | translate}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img-cropper #Bgcropper [image]="Bgdata" [settings]="BgcropperSettings"></img-cropper>
+        <p></p>
+        <span class="result rounded" *ngIf="Bgdata.image">
+          <img style="width: 128px; height: 70px;" [src]="Bgdata.image" [width]="BgcropperSettings.croppedWidth" [height]="BgcropperSettings.croppedHeight">
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button class='btn DoneCrop' data-dismiss="modal">{{"#Done" | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

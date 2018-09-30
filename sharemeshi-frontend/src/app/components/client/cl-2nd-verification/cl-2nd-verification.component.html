@@ -1,0 +1,30 @@
+<section class="clearfix user-page" id="">
+  <div class="container">
+    <div class="row text-center">
+      
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{"#2vtitle" | translate}}</h2>
+          <h4>
+              {{"#2vnotice" | translate}}
+          </h4>
+          <form name="form" style="margin-top: 50px;" (ngSubmit)="reverify.form.valid && this.doReverification()" #reverify="ngForm" validate>
+            <div class="form-group text-left" [ngClass]="{ 'has-error': reverify.submitted && !oldemail.valid }">
+              <label>{{"#2voldemail" | translate}} * </label>
+              <input type="email" class="form-control" name="oldemail" [(ngModel)]="model.oldemail" #oldemail="ngModel" required />
+              <div *ngIf="reverify.submitted && !oldemail.valid" class="help-block">{{"#2voldemailReq" | translate}}</div>
+            </div>
+            <div class="form-group text-left" [ngClass]="{ 'has-error': reverify.submitted && !newemail.valid }">
+              <label>{{"#2vnewemail" | translate}} *</label>
+              <input type="email" class="form-control" name="newemail" [(ngModel)]="model.newemail" #newemail="ngModel" required />
+              <div *ngIf="reverify.submitted && !newemail.valid" class="help-block">{{"#2vnewemailReq" | translate}}</div>
+            </div>
+            <div class="form-group">
+              <button class="btn" type="submit">{{"#Submit" | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

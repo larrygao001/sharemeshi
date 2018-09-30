@@ -1,0 +1,113 @@
+
+
+@media only screen and (max-width: 992px) {
+    .float-left{
+        float: none;
+    }
+}
+
+::placeholder {
+    color: #707070;
+}
+
+.items {
+    max-width:300px;
+    height:300px;
+    background:#ECECEC;
+}
+
+#left, #right { 
+    margin: 30px;
+}
+
+.description-main-div img{
+    width: 90px;
+    height: 90px;
+}
+
+.dropdown li a{
+    cursor: pointer;
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.reviews-info .col-md-8 .col-lg-12 {
+    padding: 20px 30px;
+    background-color: #fff;
+    color: #272727;
+    line-height: 22px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    font-family: 'Devanagari-Regular', sans-serif;
+}
+
+.t_available{
+    background-color: #28a745;
+    color: white;
+    padding: 6px;
+    border: solid 1px #28a745;
+    border-radius: 4px;
+}
+
+.t_closed{
+    background-color: #f36524;
+    color: white;
+    padding: 6px;
+    border: solid 1px #f36524;
+    border-radius: 4px;
+}
+
+.mkg-foodstatus{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+rating{
+    color: #f46c2d;
+    font-size: 20px;
+}
+
+.rater{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.each_review{
+    border-top: solid 1px #dfdfdf;
+    border-bottom: solid 1px #dfdfdf;
+    padding: 10px;
+    text-align: left;
+}
+
+.reviewed_food{
+    font-size: 17px;
+}
+
+.qty_box{
+    width: 30%;
+    float: left;
+    text-align: center;
+    background-color: #e8e8e8;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 44px;
+    line-height: 44px;
+}
+.quantity_box{
+    width: 70%;
+    float: right;
+}
+
+.fdbigcomment {
+    font-size: 17px;
+    color: black;
+}

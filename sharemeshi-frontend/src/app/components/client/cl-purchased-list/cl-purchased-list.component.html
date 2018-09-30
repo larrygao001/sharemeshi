@@ -1,0 +1,172 @@
+<section id="main" class="clearfix cartlist-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>{{"#PurchasedDetails" | translate}}</li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title">{{"#PurchasedDetails" | translate}}</h2>
+    </div>
+  </div>
+  <div class="section container">
+
+    <div class="row" style="text-align: right;">
+      <button class="btn refresh_btn" (click)="reloadDatas()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Refresh" | translate}}</button>
+    </div>
+
+    <div *ngFor="let orderitem of paginatedDatas" class="mkg-food-panel row">
+      <div class="msubpanel col-lg-3 col-md-3 col-sm-3">
+        <img *ngIf="orderitem.food_images == '' || orderitem.food_images.length == 0" style="cursor: pointer;" (click)="goToFoodDetails(orderitem.food_item_id)" class="img-responsive" src="assets/img/blank.png">
+        <img *ngIf="orderitem.food_images != '' && orderitem.food_images.length != 0" style="cursor: pointer;" (click)="goToFoodDetails(orderitem.food_item_id)" class="img-responsive" src="{{serverUrl + '/' + orderitem.food_images[0]}}">
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <h3 style="cursor: pointer;" (click)="goToFoodDetails(orderitem.food_item_id)" class="mkg-food-title">{{orderitem.item_name}}</h3>
+        <h4 class="mkg-food-sn">
+          <span class="oderid_title">{{"#OrderNumber" | translate}}</span> - {{orderitem.order_number}}
+        </h4>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd">
+              <span class="dtime">{{"#Price" | translate}} : </span>&nbsp;&nbsp;&nbsp;¥{{orderitem.price}}</h4>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd">
+              <span class="dtime">{{"#Quantity" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{orderitem.quantity}}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd">
+              <span class="dtime">{{"#DeliveryDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{orderitem.date_of_delivery}}</h4>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd">
+              <span class="dtime">{{"#DeliveryTime" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{getCorrectDTime(orderitem.time)}}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd">
+              <span class="dtime">{{"#OrderDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{getOrderdate(orderitem.created_at)}}</h4>
+          </div>
+        </div>
+        <!--div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="mkg-dd" *ngIf="orderitem.reviewed != 1">
+              <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{orderitem.deliver_status}}</h4>
+            <h4 class="mkg-dd" *ngIf="orderitem.reviewed == 1">
+              <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;Reviewed</h4>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            
+          </div>
+        </div-->
+      </div>
+      <div class="mrightpanel col-lg-3 col-md-3 col-sm-3">
+        <h3 class="mkg-total">{{"#TotalPrice" | translate}} &nbsp;
+          <span class="totalprice">¥{{orderitem.total_price}}</span>
+        </h3>
+        <div *ngIf="orderitem.food_status == 1" class="btnpanel">
+          <button (click)="goToChat(orderitem.chat_id, orderitem.order_number)" class="btn chatBtn">
+            <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Chat" | translate}}
+          </button>
+          <span [ngStyle]="getAdditionUnreadStyle(orderitem.review_status)" *ngIf="orderitem.unread_message_count != 0" class="msg_span" [class.msg_span_condition]="orderitem.review_status == 2" >{{orderitem.unread_message_count}}</span>
+        </div>
+        <div [class.fstyle]="orderitem.food_status != 1">
+          <button *ngIf="orderitem.review_status == 0" (click)="openModal(template, orderitem.order_id, orderitem.food_item_id)" class="btn reviewBtn">{{"#Review" | translate}}</button>
+          <p *ngIf="orderitem.review_status != 0" [hidden]="orderitem.review_status == 2" class="t_reviewed">{{'#Reviewed' | translate}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="emptybox" [hidden]="paginatedDatas.length != 0" style="text-align: center;">
+      <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+      <h3 style="color: #f26522;">{{'#NoPurchasedTitle' | translate}}</h3>
+      <h4>{{'#NoPurchasedContents' | translate}}</h4>
+      <button (click)="goToFoodList()" class="btn cartsbtn" style="min-width: 150px !important; height: 50px;" type="button">{{'#ContinueShopping' | translate}}</button>
+    </div>
+
+    <div class="text-center">
+      <ul class="pagination ">
+        <li>
+          <a (click)="clickedCaret(0)">
+            <i class="fa fa-backward"></i>
+          </a>
+        </li>
+        <li>
+          <a (click)="clickedCaret(1)">
+            <i class="fa fa-chevron-left"></i>
+          </a>
+        </li>
+        <li *ngFor="let pwidget of paginateWidgets;" [class.active]='paginateActive == pwidget'>
+          <a (click)="clickedPaginate(pwidget)">{{pwidget}}</a>
+        </li>
+        <li>
+          <a (click)="clickedCaret(2)">
+            <i class="fa fa-chevron-right"></i>
+          </a>
+        </li>
+        <li>
+          <a (click)="clickedCaret(3)">
+            <i class="fa fa-forward"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left review-header">{{"#GiveaReview" | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+    <div class="col-lg-1 col-md-1 col-sm-1">
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 reviewbody">
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+          <h3>{{"#Quality" | translate}}</h3>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <rating style="margin-top: 3px;" [(ngModel)]="reviewObj.quality_ratings" [max]="5" [readonly]="false"></rating>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+          <h3>{{"#Delivery" | translate}}</h3>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <rating style="margin-top: 3px;" [(ngModel)]="reviewObj.delivery_ratings" [max]="5" [readonly]="false"></rating>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+          <h3>{{"#Communication" | translate}}</h3>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <rating style="margin-top: 3px;" [(ngModel)]="reviewObj.communication_ratings" [max]="5" [readonly]="false"></rating>
+        </div>
+      </div>
+      <div>
+        <textarea style="margin-top: 30px;" [(ngModel)]="reviewObj.review_description" placeholder="Enter Your Description"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1">
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align: center;">
+    <button (click)="doSubmitReview()" class="btn submitReviewBtn">{{"#Submit" | translate}}</button>
+  </div>
+</ng-template>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

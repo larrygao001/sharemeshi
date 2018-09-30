@@ -1,0 +1,336 @@
+.upcome{
+    border-right: solid 1px;
+}
+
+.order-tabs div span:hover{
+    color: #f36524;
+}
+.order-tabs div{
+    text-align: center;
+    line-height: 2;
+}
+
+.order-tabs{
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 3px #f3f3f3;
+}
+
+.totalprice{
+    color: #f26522;
+}
+
+.mkg-total{
+    font-size: 28px;
+}
+
+.dtime{
+    color: black;
+    font-weight: bold;
+}
+
+.mkg-dd{
+    font-size: 15px;
+}
+
+.oderid_title{
+    font-weight: 700;
+}
+
+.mkg-food-sn{
+    color: #f26522;
+}
+
+.mkg-food-title{
+    color: #f26522;
+    font-size: 28px;
+}
+
+.msubpanel{
+    padding: 23px;
+}
+
+.mrightpanel{
+    text-align: right;
+}
+
+.mkg-food-panel{
+    padding: 15px 0px;
+    border-bottom: solid 1px #f3f3f3;
+    border-top: solid 1px #f3f3f3;
+    margin-right: -25px;
+    margin-left: -25px;
+}
+
+.section
+{
+    padding: 0px 25px;
+}
+
+.tactive{
+    color: #f36524;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.utactive{
+    color: black;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.reviewBtn{
+    padding: 10px;
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+    width: 150px;
+    /*margin-top: 100px;*/
+}
+
+.reviewBtn:hover{
+    background-color: white;
+    color: #f36524;
+    border: solid 1px #f36524;
+}
+
+.PrevpaidBtn{
+    padding: 10px;
+    width: 100px;
+    margin-top: 100px;
+    background-color: white;
+    color: black;
+    border: solid 1px #f36524;
+}
+
+.PrevpaidBtn:hover{
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+}
+
+.PrevreviewBtn{
+    padding: 10px;
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+    width: 100px;
+    margin-top: 100px;
+}
+
+.PrevreviewBtn:hover{
+    background-color: white;
+    color: black;
+    border: solid 1px #f36524;
+}
+
+.review-header{
+    color: #f36524;
+    font-weight: 700;
+}
+
+rating{
+	font-size: 35px;
+    color: #f36524;
+}
+
+.reviewbody{
+    text-align: center;
+    z-index:  20;
+}
+
+.reviewbody h3{
+    color: black;
+}
+
+.reviewbody textarea{
+    width: 100%;
+    height: 250px;
+    border-radius: 5px;
+}
+
+.leftarraow{
+    z-index:  25;
+    border-radius: 100px;
+    background-color: #f36525;
+    padding: 18px 24px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    left: -10px;
+}
+
+.leftarraow:hover{
+    background-color: white;
+    color: #f36525;
+    border: solid 1px #f36525;
+}
+
+.rightarraow{
+    z-index:  25;
+    border-radius: 100px;
+    background-color: #f36525;
+    padding: 18px 24px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    right: -10px;
+}
+
+.rightarraow:hover{
+    background-color: white;
+    color: #f36525;
+    border: solid 1px #f36525;
+}
+
+.t_reviewed{
+    font-style: italic;
+    font-size: 14px;
+    color: #f36525;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-right: 15px;
+}
+
+.msg_span{
+    padding: 5px 10px;
+    color: white;
+    border-radius: 50px;
+    background-color: #5cc924;
+
+    position: absolute;
+    right: 5px;
+    bottom: 75px;
+}
+
+.btnpanel{
+    margin-top: 100px; 
+    width: 100%; 
+    height: 50px;
+}
+
+.eaterInfoBtn{
+    padding: 10px;
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+    width: 150px;
+}
+.eaterInfoBtn:hover{
+    background-color: white;
+    color: #f36524;
+    border: solid 1px #f36524;
+}
+.eater_img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #f26522;
+}
+
+
+.rpbtn{
+    padding: 10px;
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+    /*width: 150px;*/
+}
+.rpbtn:hover{
+    background-color: white;
+    color: #f36524;
+    border: solid 1px #f36524;
+}
+
+@media screen and (max-width: 992px) {
+  .reviewBtn{
+      /*margin-top: 10px;*/
+  }
+  .PrevreviewBtn{
+      margin-top: 10px;
+  }
+  .PrevpaidBtn{
+      margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .reviewbody textarea{
+      width: 80%;
+  }
+  .btnpanel{
+      margin-top: 10px;
+  }
+}
+
+.submitReviewBtn{
+    width: 150px;
+    background-color: #f36525;
+    color: white;
+}
+
+.submitReviewBtn:hover{
+    width: 150px;
+    background-color: white;
+    color: #f36525;
+    border: solid 1px #f36525;
+}
+
+.modal-content{
+    border-radius: 5px;
+}
+
+#emptybox .img-responsive{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.cartsbtn{
+    padding: 10px;
+    min-width: 50%;
+    background-color: #f26522;
+    color: white;
+    margin-top: 30px;
+}
+
+.cartsbtn:hover{
+    background-color: white;
+    color: black;
+    border: solid 1px #f26522;
+}
+
+.pagination a{
+    cursor: pointer;
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.refresh_btn:hover{
+    background-color: white;
+    color: #f36524;
+    border: solid 1px#f36524;
+}
+
+.refresh_btn{
+    padding: 10px;
+    background-color: #f36524;
+    color: white;
+    border: solid 1px#f36524;
+    width: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+}

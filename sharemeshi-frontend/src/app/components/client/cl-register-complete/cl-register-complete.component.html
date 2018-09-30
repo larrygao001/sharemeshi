@@ -1,0 +1,131 @@
+<section id="" class="clearfix user-page">
+    <div class="container">
+        <div class="row text-center">
+            <!-- user-register -->
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <div class="user-account">
+                    <h2>{{'#UserRegister' | translate}}</h2>
+                    <!-- form -->
+                    <form name="form" (ngSubmit)="register.form.valid && this.doRegister()" #register="ngForm" validate>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !name.valid }">
+                            <label>{{'#YourName' | translate}} *</label>
+                            <p>{{'#Reg_NameDesc' | translate}}</p>
+                            <input placeholder="{{'#Reg_NamePlaceholder' | translate}}" type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel"
+                                required>
+                            <div *ngIf="register.submitted && !name.valid" class="help-block">{{'#YourNameRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !age.valid }">
+                            <label>{{'#Age' | translate}} *</label>
+                            <p>{{'#Reg_AgeDesc' | translate}}</p>
+                            <select class="form-control" name="age" [(ngModel)]="model.age" #age="ngModel" required>
+                                <option value="">--{{'#SelectAge' | translate}}--</option>
+                                <option *ngFor="let iage of r_age" value="{{iage.id}}">{{iage.value | translate}}</option>
+                            </select>
+                            <div *ngIf="register.submitted && !age.valid" class="help-block">{{'#AgeRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !phone_number.valid }">
+                            <label>{{'#PhoneNumber' | translate}} *</label>
+                            <p>{{'#Reg_PhoneNumDesc' | translate}}</p>
+                            <input placeholder="09012345678" type="text" class="form-control" name="phone_number" [(ngModel)]="model.phone_number" #phone_number="ngModel"
+                                required>
+                            <div *ngIf="register.submitted && !phone_number.valid" class="help-block">{{'#PNRequired' | translate}}</div>
+                        </div>
+
+                        <!--div class="form-group" [ngClass]="{ 'has-error': register.submitted && !address.valid }">
+                            <label>{{'#Address' | translate}} *</label>
+                            <p>{{'#Reg_AddressDesc' | translate}}</p>
+                            <input placeholder="{{'#Reg_AddressPlaceholder' | translate}}" name="address" [(ngModel)]="model.address" #address="ngModel" autocorrect="off" autocapitalize="off"
+                                spellcheck="off" type="text" class="form-control" #search required>
+                            <div *ngIf="register.submitted && !address.valid" class="help-block">{{'#ADRequired' | translate}}</div>
+                        </div-->
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !zipcode.valid }">
+                            <label>{{'#Zipcode' | translate}} *</label>
+                            <p>{{'#Reg_ZipcodeDesc' | translate}}</p>
+                            <input placeholder="104-0661" type="text" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" #zipcode="ngModel"
+                                required>
+                            <div *ngIf="register.submitted && !zipcode.valid" class="help-block">{{'#ZCRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !prefecture.valid }">
+                            <label>{{'#Prefecture' | translate}} *</label>
+                            <p>{{'#Reg_PrefectureDesc' | translate}}</p>
+                            <input placeholder="{{'#Reg_PrefPlaceholder' | translate}}" type="text" class="form-control" name="prefecture" [(ngModel)]="model.prefecture"
+                                #prefecture="ngModel" required>
+                            <div *ngIf="register.submitted && !prefecture.valid" class="help-block">{{'#PFRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !municipality.valid }">
+                            <label>{{'#Municipality' | translate}} *</label>
+                            <input placeholder="{{'#Reg_MuniPlaceholder' | translate}}" type="text" class="form-control" name="municipality" [(ngModel)]="model.municipality"
+                                #municipality="ngModel" required>
+                            <div *ngIf="register.submitted && !municipality.valid" class="help-block">{{'#MCRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !another_address.valid }">
+                            <label>{{'#Reg_AnotherAddress' | translate}} *</label>
+                            <p>{{'#Reg_AADesc' | translate}}</p>
+                            <input type="text" class="form-control" name="another_address" [(ngModel)]="model.another_address" #another_address="ngModel"
+                                required>
+                            <div *ngIf="register.submitted && !another_address.valid" class="help-block">{{'#Reg_AARequired' | translate}}</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>{{'#Reg_BN' | translate}}</label>
+                            <p>{{'#Reg_BNDesc' | translate}}</p>
+                            <input type="text" class="form-control" name="building_nn" [(ngModel)]="model.building_nn" #building_nn="ngModel">
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !gender.valid }">
+                            <label>{{'#Gender' | translate}} *</label>
+                            <p>{{'#Reg_GenderDesc' | translate}}</p>
+                            <select class="form-control" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+                                <option value="">--{{'#ChooseGender' | translate}}--</option>
+                                <option *ngFor="let igender of r_gender" value="{{igender.id}}">{{igender.value | translate}}</option>
+                            </select>
+                            <div *ngIf="register.submitted && !gender.valid" class="help-block">{{'#GenderRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !profession.valid }">
+                            <label>{{'#Job' | translate}} *</label>
+                            <p>{{'#Reg_JobDesc' | translate}}</p>
+                            <select class="form-control" name="profession" [(ngModel)]="model.profession" #profession="ngModel" required>
+                                <option value="">--{{'#SelectJob' | translate}}--</option>
+                                <option *ngFor="let ipro of r_profession" value="{{ipro.id}}">{{ipro.value | translate}}</option>
+                            </select>
+                            <div *ngIf="register.submitted && !profession.valid" class="help-block">{{'#JobRequired' | translate}}</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{'#UserIntroduction' | translate}}</label>
+                            <p>{{'#Reg_UserIntroDesc' | translate}}</p>
+                            <textarea style="height: 100px;" placeholder="{{'#Reg_IntroPlaceholder' | translate}}" type="text" class="form-control" name="user_introduction" [(ngModel)]="model.user_introduction" #user_introduction="ngModel">
+                            </textarea>
+                            <!--div *ngIf="register.submitted && !user_introduction.valid" class="help-block">{{'#UIRequired' | translate}}</div-->
+                        </div>
+
+                        <div class="checkbox" style="text-align: left;">
+                            <div>
+                                <label [class.checked]="fusertype" style="color: black; font-weight: bold;">
+                                    {{'#DoyouwantCreator' | translate}}
+                                    <input type="checkbox" name="fusertype" [(ngModel)]="fusertype">
+                                </label>
+                                <p>{{"#doyouwantcreator_desc" | translate}}</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%;">{{'#Submit' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+            <!-- user-register -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</section>
+<!-- register-page -->
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

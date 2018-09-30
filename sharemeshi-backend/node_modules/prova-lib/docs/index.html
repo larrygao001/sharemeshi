@@ -1,0 +1,977 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<blockquote>
+<p>To initialize Prova, simply call</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">prova</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'prova'</span><span class="p">);</span>
+</code></pre>
+<p>Welcome to the ProvaJS documentation! This library allows JavScript clients to interact with Prova-blockchain-based
+secured assets.</p>
+
+          <h1 id="address">Address</h1>
+
+<h2 id="create-address">Create Address</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="s1">'xpub661MyM…RxNMpPfTSY'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">keyID1</span> <span class="o">=</span> <span class="mi">33554432</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">keyID2</span> <span class="o">=</span> <span class="mi">16777216</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">address</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">keyID1</span><span class="p">,</span> <span class="nx">keyID2</span><span class="p">,</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">rmg</span><span class="p">);</span>
+</code></pre>
+<p>Instantiate an Address object.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>publicKey</td>
+<td>Buffer</td>
+<td>No</td>
+<td>ECPair public or private key material as a Buffer instance</td>
+</tr>
+<tr>
+<td></td>
+<td>HDNode</td>
+<td></td>
+<td>HDNode instance</td>
+</tr>
+<tr>
+<td></td>
+<td>String</td>
+<td></td>
+<td>Base58-HDNode representation starting with &ldquo;xpub&rdquo; or &ldquo;xprv&rdquo;</td>
+</tr>
+<tr>
+<td>keyID1</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>First ASP key ID</td>
+</tr>
+<tr>
+<td>keyID2</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Second ASP key ID</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">If <code>publicKey</code> is not specified, <code>address.setPublicKeyHash()</code> needs to be called to make the instance
+usable.</aside>
+
+<h2 id="obtain-address">Obtain Address</h2>
+
+<p>Obtain an address object from a non-instance representation.</p>
+
+<h3 id="from-base58">From Base58</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">base58Address</span> <span class="o">=</span> <span class="s1">'THkSaYyczf2X3EgGcoxnyNHYsYQpaBNncBRTa3fNxjxqH'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">.</span><span class="nx">fromBase58</span><span class="p">(</span><span class="nx">base58Address</span><span class="p">);</span>
+</code></pre>
+<p>Obtain address object from a base58-string.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">Address.fromBase58()</code></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base58</td>
+<td>String</td>
+<td>Yes</td>
+<td>Base58-string address representation</td>
+</tr>
+</tbody></table>
+
+<h3 id="from-script">From Script</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">script</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="s1">'52147ef3c5…00000253ba'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">.</span><span class="nx">fromScript</span><span class="p">(</span><span class="nx">script</span><span class="p">,</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">rmgTest</span><span class="p">);</span>
+</code></pre>
+<p>Obtain address object from a base58-string.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">Address.fromScript()</code></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>script</td>
+<td>Buffer</td>
+<td>Yes</td>
+<td>Output script buffer</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<h2 id="verify-address">Verify Address</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">base58Address</span> <span class="o">=</span> <span class="s1">'THkSaYyczf2X3EgGcoxnyNHYsYQpaBNncBRTa3fNxjxqH'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">.</span><span class="nx">validateBase58</span><span class="p">(</span><span class="nx">base58Address</span><span class="p">,</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">rmg</span><span class="p">);</span>
+</code></pre>
+<p>Check whether an address string is valid. Returns <code class="prettyprint">true</code> if valid, <code class="prettyprint">false</code> otherwise.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">Address.validateBase58()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base58</td>
+<td>String</td>
+<td>Yes</td>
+<td>Base58-string address representation</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network. If set, ensures the address is on the given network.</td>
+</tr>
+</tbody></table>
+
+<h2 id="convert-address">Convert Address</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">address</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span> <span class="nx">keyID1</span><span class="p">,</span> <span class="nx">keyID2</span><span class="p">);</span>
+</code></pre>
+<p>Convert an address instance to a non-instance representation.</p>
+
+<h3 id="to-base58">To Base58</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">base58Address</span> <span class="o">=</span> <span class="nx">address</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="nx">prova</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">rmgTest</span><span class="p">);</span>
+</code></pre>
+<p>Convert an address object to a base58-string.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">address.toString()</code></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network. If set, overrides the network.</td>
+</tr>
+</tbody></table>
+
+<h3 id="to-script">To Script</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">script</span> <span class="o">=</span> <span class="nx">address</span><span class="p">.</span><span class="nx">toScript</span><span class="p">();</span>
+</code></pre>
+<p>Convert an address to an output script. Returns a <code class="prettyprint">Buffer</code> instance.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">address.toScript()</code></p>
+
+<h2 id="set-public-key">Set Public Key</h2>
+
+<h2 id="set-public-key-hash">Set Public Key Hash</h2>
+
+          <h1 id="ecpair">ECPair</h1>
+
+<h2 id="create-ecpair">Create ECPair</h2>
+
+<p>Construct an ECPair object from a Buffer.</p>
+
+<h3 id="from-public-key">From Public Key</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="s1">'02192d74d0…5dca52c6b4'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">ecPair</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">ECPair</span><span class="p">.</span><span class="nx">fromPublicKeyBuffer</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">);</span>
+</code></pre>
+<p>Create an ECPair object based on a public key Buffer object.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">ECPair.fromPublicKeyBuffer()</code></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>buffer</td>
+<td>Buffer</td>
+<td>Yes</td>
+<td>33-byte-Buffer instance representing a public key</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<h3 id="from-private-key">From Private Key</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="s1">'eaf02ca348…ffdca22694'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">ecPair</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">ECPair</span><span class="p">.</span><span class="nx">fromPrivateKeyBuffer</span><span class="p">(</span><span class="nx">privateKey</span><span class="p">);</span>
+</code></pre>
+<p>Create an ECPair object based on a private key Buffer object.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">ECPair.fromPrivateKeyBuffer()</code></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>buffer</td>
+<td>Buffer</td>
+<td>Yes</td>
+<td>32-byte-Buffer instance representing a private key</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+          <h1 id="hdnode">HDNode</h1>
+
+<h2 id="obtain-hdnode">Obtain HDNode</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">xprv</span> <span class="o">=</span> <span class="s1">'xprv9s21Zr…AAmLuBpULA'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">hdNode</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">HDNode</span><span class="p">.</span><span class="nx">fromBase58</span><span class="p">(</span><span class="nx">xprv</span><span class="p">);</span>
+</code></pre>
+<p>Obtain an HDNode instance based on an xpub or xprv string.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">HDNode.fromBase58()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base58</td>
+<td>String</td>
+<td>Yes</td>
+<td>Xpub string representing an HD public key</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>Xprv string representing an HD private key</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<h2 id="convert-hdnode">Convert HDNode</h2>
+
+<p>Convert an HDNode into a non-instance representation.</p>
+
+<h3 id="to-xpub">To Xpub</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">xpub</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">neutered</span><span class="p">().</span><span class="nx">toBase58</span><span class="p">();</span>
+</code></pre>
+<p>Convert HDNode instance to an xpub public key string representation.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">hdNode.neutered().toBase58()</code></p>
+
+<h3 id="to-xprv">To Xprv</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">xprv</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">toBase58</span><span class="p">();</span>
+</code></pre>
+<p>Convert HDNode instance to an xprv private key string representation.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">hdNode.toBase58()</code></p>
+
+<aside class="warning">If <code>hdNode</code> was constructed without a private key, this method will only return an xpub string.</aside>
+
+<h3 id="to-ecpair">To ECPair</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">ecPair</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">getKey</span><span class="p">();</span>
+</code></pre>
+<p>Get an ECPair instance representing the current node&rsquo;s public key or key pair.</p>
+
+<h4 id="method">Method</h4>
+
+<p><code class="prettyprint">hdNode.getKey()</code></p>
+
+<h2 id="derive-hd-node">Derive HD Node</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">path</span> <span class="o">=</span> <span class="s1">'/255/1230141/255'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">derivedNode</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">hdPath</span><span class="p">().</span><span class="nx">derive</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+</code></pre>
+<p>Derive a new HDNode instance based on an HDNode object and a derivation path.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">hdNode.hdPath().derive()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>String</td>
+<td>Yes</td>
+<td>Derivation path</td>
+</tr>
+</tbody></table>
+
+          <h1 id="transaction">Transaction</h1>
+
+<h2 id="obtain-transaction">Obtain Transaction</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">transactionHex</span> <span class="o">=</span> <span class="s1">'0100000001…ba00000000'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">transaction</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Transaction</span><span class="p">.</span><span class="nx">fromHex</span><span class="p">(</span><span class="nx">transactionHex</span><span class="p">);</span>
+</code></pre>
+<p>Obtain an HDNode instance based on an xpub or xprv string.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">Transaction.fromHex()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hex</td>
+<td>String</td>
+<td>Yes</td>
+<td>Hexadecimal transaction string</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-id">Get ID</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">txID</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">getId</span><span class="p">();</span>
+</code></pre>
+<p>Calculate transaction ID. Returns a 64-character hexadecimal string.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transaction.getId()</code></p>
+
+<h2 id="get-hex">Get Hex</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">txHex</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">toHex</span><span class="p">();</span>
+</code></pre>
+<p>Converts transaction to a hexadecimal string.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transaction.toHex()</code></p>
+
+          <h1 id="transaction-builder">Transaction Builder</h1>
+
+<h2 id="create-transaction-builder">Create Transaction Builder</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">txBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">TransactionBuilder</span><span class="p">(</span><span class="nx">prova</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">rmg</span><span class="p">);</span>
+</code></pre>
+<p>Create a transaction builder object from scratch.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>Yes</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<h2 id="obtain-transaction-builder">Obtain Transaction Builder</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">txHex</span> <span class="o">=</span> <span class="s1">'0100000001…ba00000000'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">transaction</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Transaction</span><span class="p">.</span><span class="nx">fromHex</span><span class="p">(</span><span class="nx">txHex</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">txBuilder</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">TransactionBuilder</span><span class="p">.</span><span class="nx">fromTransaction</span><span class="p">(</span><span class="nx">transaction</span><span class="p">);</span>
+</code></pre>
+<p>Obtain a transaction builder instance based on a transaction instance.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">TransactionBuilder.fromTransaction()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transaction</td>
+<td>Transaction</td>
+<td>Yes</td>
+<td>Instance of a transaction object</td>
+</tr>
+<tr>
+<td>network</td>
+<td>prova.networks Object</td>
+<td>No</td>
+<td>The chain network</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-transaction">Get Transaction</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">transaction</span> <span class="o">=</span> <span class="nx">txBuilder</span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+</code></pre>
+<p>Obtain a transaction instance.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.build()</code></p>
+
+<h2 id="add-output">Add Output</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">destination</span> <span class="o">=</span> <span class="s1">'THkSaYyczf2X3EgGcoxnyNHYsYQpaBNncBRTa3fNxjxqH'</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">3850000</span><span class="p">;</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">addOutput</span><span class="p">(</span><span class="nx">destination</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre>
+<p>Add an output to the transaction builder.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.addOutput()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>destinationAddress</td>
+<td>Address</td>
+<td>Yes</td>
+<td>Address instance of the destination</td>
+</tr>
+<tr>
+<td></td>
+<td>String</td>
+<td></td>
+<td>Base58-string representation of the destination address</td>
+</tr>
+<tr>
+<td>value</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Amount in atoms of the value to send</td>
+</tr>
+</tbody></table>
+
+<h2 id="add-admin-thread-output">Add Admin Thread Output</h2>
+<pre class="highlight javascript"><code><span class="nx">txBuilder</span><span class="p">.</span><span class="nx">addAdminThreadOutput</span><span class="p">(</span><span class="nx">prova</span><span class="p">.</span><span class="nx">ADMIN</span><span class="p">.</span><span class="nx">THREADS</span><span class="p">.</span><span class="nx">PROVISIONING</span><span class="p">);</span>
+</code></pre>
+<p>Add an output to the transaction builder marking it as an admin transaction by specifying the admin thread.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.addAdminThreadOutput(threadID)</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>threadID</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Thread ID of the admin transaction. One of <code class="prettyprint">prova.ADMIN.THREADS</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="add-admin-key-update-output">Add Admin Key Update Output</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">operation</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">ADMIN</span><span class="p">.</span><span class="nx">OPERATIONS</span><span class="p">.</span><span class="nx">REVOKE_KEY</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">keyType</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">ADMIN</span><span class="p">.</span><span class="nx">KEY_TYPES</span><span class="p">.</span><span class="nx">ROOT</span><span class="p">.</span><span class="nx">PROVISIONING_KEY</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">ECPair</span><span class="p">.</span><span class="nx">fromPublicKeyBuffer</span><span class="p">(</span><span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="s1">'025ceeba2a…57d233edf1'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">));</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">addKeyUpdateOutput</span><span class="p">(</span><span class="nx">operation</span><span class="p">,</span> <span class="nx">keyType</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">);</span>
+</code></pre>
+<p>Add admin output to provision or revoke a signing key.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.addKeyUpdateOutput(operation, keyType, publicKey)</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>operation</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Key operation enum. One of <code class="prettyprint">prova.ADMIN.OPERATIONS</code></td>
+</tr>
+<tr>
+<td>keyType</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Key type enum. One of <code class="prettyprint">prova.ADMIN.KEY_TYPES</code>. Nested</td>
+</tr>
+<tr>
+<td>publicKey</td>
+<td>Buffer</td>
+<td>No</td>
+<td>ECPair public or private key material as a Buffer instance</td>
+</tr>
+<tr>
+<td></td>
+<td>HDNode</td>
+<td></td>
+<td>HDNode instance</td>
+</tr>
+<tr>
+<td></td>
+<td>String</td>
+<td></td>
+<td>Base58-HDNode representation starting with &ldquo;xpub&rdquo; or &ldquo;xprv&rdquo;</td>
+</tr>
+</tbody></table>
+
+<h2 id="add-fund-destruction-output">Add Fund Destruction Output</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">amount</span> <span class="o">=</span> <span class="mi">2400000</span><span class="p">;</span> <span class="c1">// 2.4 grams</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">addFundDestructionOutput</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span>
+</code></pre>
+<p>Add admin output destroying a specified amount of funds.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.addFundDestructionOutput(amount)</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Amount in atoms of the value to send</td>
+</tr>
+</tbody></table>
+
+<h2 id="add-input">Add Input</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">inputTransaction</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Transaction</span><span class="p">.</span><span class="nx">fromHex</span><span class="p">(</span><span class="s1">'…'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">outputIndex</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">addInput</span><span class="p">(</span><span class="nx">inputTransaction</span><span class="p">.</span><span class="nx">getId</span><span class="p">(),</span> <span class="nx">outputIndex</span><span class="p">,</span> <span class="mh">0xffffffff</span><span class="p">);</span>
+</code></pre>
+<p>Add an input to the transaction builder.</p>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.addInput(inputTransactionID, outputIndex, sequence)</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>inputTransactionID</td>
+<td>String</td>
+<td>Yes</td>
+<td>ID of the input&rsquo;s previous output transaction</td>
+</tr>
+<tr>
+<td>outputIndex</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Output index of the input transaction</td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>No</td>
+<td>Typically <code class="prettyprint">0xffffffff</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="sign-input">Sign Input</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">inputIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">getKey</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">outputAddress</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Address</span><span class="p">.</span><span class="nx">fromBase58</span><span class="p">(</span><span class="s1">'THkSaYyczf…Ta3fNxjxqH'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">4000000</span><span class="p">;</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">inputIndex</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">,</span> <span class="nx">outputAddress</span><span class="p">.</span><span class="nx">toScript</span><span class="p">(),</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre>
+<p>Sign a transaction input.</p>
+
+<aside class="notice">Due to <code>SIGHASH_ALL</code>, inputs should only be signed after all outputs are set.</aside>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.sign()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>inputIndex</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Input index of the current transaction</td>
+</tr>
+<tr>
+<td>privateKey</td>
+<td>ECPair</td>
+<td>Yes</td>
+<td>ECPair private key instance used for signing</td>
+</tr>
+<tr>
+<td>outputScript</td>
+<td>Buffer</td>
+<td>Yes</td>
+<td>Script of the previous transaction&rsquo;s output</td>
+</tr>
+<tr>
+<td>value</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Amount in atoms of the spent value</td>
+</tr>
+</tbody></table>
+
+<h2 id="simple-sign-input">Simple Sign Input</h2>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">inputIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="nx">hdNode</span><span class="p">.</span><span class="nx">getKey</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">inputTransaction</span> <span class="o">=</span> <span class="nx">prova</span><span class="p">.</span><span class="nx">Transaction</span><span class="p">.</span><span class="nx">fromHex</span><span class="p">(</span><span class="s1">'…'</span><span class="p">);</span>
+<span class="nx">txBuilder</span><span class="p">.</span><span class="nx">signWtihTx</span><span class="p">(</span><span class="nx">inputIndex</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">,</span> <span class="nx">inputTransaction</span><span class="p">);</span>
+</code></pre>
+<p>Sign an input if its previous transaction is available.</p>
+
+<aside class="notice">Due to <code>SIGHASH_ALL</code>, inputs should only be signed after all outputs are set.</aside>
+
+<h3 id="method">Method</h3>
+
+<p><code class="prettyprint">transactionBuilder.signWithTx()</code></p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>inputIndex</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Input index of the current transaction</td>
+</tr>
+<tr>
+<td>privateKey</td>
+<td>ECPair</td>
+<td>Yes</td>
+<td>ECPair private key instance used for signing</td>
+</tr>
+<tr>
+<td>inputTransaction</td>
+<td>Transaction</td>
+<td>Yes</td>
+<td>Transaction whose output is used for the input to be signed</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

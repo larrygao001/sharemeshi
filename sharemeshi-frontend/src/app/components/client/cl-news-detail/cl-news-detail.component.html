@@ -1,0 +1,45 @@
+<section id="" class="clearfix category-page">
+  <div class="col-lg-12 col-xs-12 p-0">
+    <div class="container">
+      <div class="breadcrumb-section">
+        <!-- breadcrumb -->
+        <ol class="breadcrumb new-breadcrumb">
+          <li class="t-orange">
+            <a routerLink="/">{{"#Home" | translate}}</a>
+          </li>
+          <li class="t-orange">
+            <a routerLink="{{'/news-detail/' + newsData.news_id}}">{{"#News" | translate}}</a>
+          </li>
+        </ol>
+        <!-- breadcrumb -->
+        <h2 class="title d-inline-block t-orange">{{"#News" | translate}}</h2>
+      </div>
+      <div class="col-lg-12 col-xs-12 p-0 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 d-inline-block float-none section about boxes-card">
+          <div class="about-info news-list-box">
+            <!-- about-text -->
+            <div class="col-md-12 col-xs-12 text-center">
+              <!-- <div class="col-md-8 float-none d-inline-block"> -->
+              <div class="about-text">
+                <!-- title-paragraph -->
+                <div class="description-paragraph news-list-title">
+                  <h3 class="about-us-text news-details-text">{{newsData.title}}</h3>
+                </div>
+                <!-- title-paragraph -->
+
+                <!-- content-paragraph -->
+                <div class="description-paragraph text-left" [innerHTML]="newsData.contents" style="margin-top: 50px; white-space: pre-line;">
+                  
+                </div>
+                <!-- content-paragraph -->
+              </div>
+              <!-- </div> -->
+            </div>
+            <!-- about-text -->
+          </div>
+          <!-- about-info -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

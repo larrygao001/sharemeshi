@@ -1,0 +1,94 @@
+.img-responsive{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.cartsbtn{
+    padding: 10px;
+    min-width: 50%;
+    background-color: #f26522;
+    color: white;
+    margin-top: 30px;
+}
+
+.cartsbtn:hover{
+    background-color: white;
+    color: black;
+    border: solid 1px #f26522;
+}
+
+.ar_btn i:hover{
+    color: #f26522;
+}
+
+.ar_btn{
+    cursor: pointer;
+}
+
+.totalprice{
+    color: #f26522;
+}
+
+.mkg-total{
+    font-size: 28px;
+}
+
+.dtime{
+    color: black;
+    font-weight: bold;
+}
+
+.mkg-dd{
+    font-size: 15px;
+}
+
+.username{
+    color: #f26522;
+    font-weight: 700;
+}
+
+.mkg-food-sn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mkg-food-title{
+    color: #f26522;
+    font-size: 28px;
+}
+
+.msubpanel{
+    padding: 23px;
+}
+
+.mrightpanel{
+    text-align: right;
+}
+
+.mkg-food-panel{
+    padding: 15px 0px;
+    border-bottom: solid 1px #f3f3f3;
+    border-top: solid 1px #f3f3f3;
+    margin-right: -25px;
+    margin-left: -25px;
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.purchaseBtns {
+    margin-top: 30px;
+}
+
+.ppselect {
+    border-radius: 3px;
+    width: 60px;
+}

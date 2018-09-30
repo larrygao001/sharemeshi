@@ -1,0 +1,310 @@
+<section id="main" class="clearfix details-page">
+  <div class="container">
+
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>
+          <a routerLink="/food-detail">{{'#FoodDetails' | translate}}</a>
+        </li>
+
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title">{{category_name}}</h2>
+    </div>
+
+    <!--div class="row">
+      <div class="col-sm-12">
+        <div class="banner">
+          <div class="banner-form banner-form-full">
+            <form action="#">
+              <div class="dropdown category-dropdown">
+                <a data-toggle="dropdown" href="#">
+                  <span id="mycategory" class="change-text">{{"#SelectCategory" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu category-change">
+                  <li>
+                    <a (click)="setCategory(1000 , 'Select Category')">{{"#SelectCategory" | translate}}</a>
+                  </li>
+                  <li *ngFor="let fcitem of food_categories">
+                    <a (click)="setCategory(fcitem.category_id , fcitem.category_name)">{{fcitem.category_name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="dropdown category-dropdown language-dropdown ">
+                <a data-toggle="dropdown" href="#">
+                  <span id="mycountry" class="change-text">{{"#SelectCountry" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu  language-change">
+                  <li>
+                    <a (click)="setCountry('none', 'Select Country')">{{"#SelectCountry" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Japan', 'Japan')">{{"Japan" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Other', 'Other')">{{"Other" | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <input type="text" class="form-control" [(ngModel)]="model.keyword" name="text" placeholder="Type Your key word">
+              <button class="form-control" value="Search" (click)="doFilter()">{{"#Search" | translate}}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div-->
+
+    <div class="section slider">
+      <div class="row">
+        <!-- carousel -->
+        <div class="col-md-7">
+          <carousel>
+            <slide *ngFor="let fimg of foodDatas.food_images; let i=index;">
+              <img src="{{serverUrl +'/'+ fimg}}" alt="First slide" style="display: block; width: 100%;">
+            </slide>
+          </carousel>
+        </div>
+        <!-- Controls -->
+
+        <!-- slider-text -->
+        <div class="col-md-5">
+          <div class="slider-text">
+            <h2 style="color: black;">¥{{foodDatas.price}}</h2>
+            <h3 class="title">{{foodDatas.item_name}}</h3>
+            <p>
+              <!--span>{{'#OfferedBy' | translate}}:
+                <a routerLink="/profile">{{foodDatas.made_by}}</a>
+              </span>
+              <span class="icon">
+                <i class="fa fa-clock-o"></i>
+                <a href="#">{{foodDatas.date_of_availability}}</a>
+              </span>
+              <span class="icon">
+                <i class="fa fa-map-marker"></i>
+                <a href="#">{{foodDatas.street}}, {{foodDatas.municipality}}</a>
+              </span-->
+
+              <div class="mkg-foodstatus">
+                <span *ngIf="foodDatas.food_status == 1" class="t_available">
+                  {{getFoodStatusName(foodDatas.food_status) | translate}}
+                </span>
+                <span *ngIf="foodDatas.food_status == 0" class="t_closed">
+                  {{getFoodStatusName(foodDatas.food_status) | translate}}
+                </span>
+                <span *ngIf="foodDatas.area != ''" class="mkg-home-category-area mkg-t-orange">{{foodDatas.area}}</span>
+              </div>
+
+              <!-- price -->
+              <div class="short-info">
+                <h4>{{'#Price' | translate}}</h4>
+                <p class="detail-price-list">
+                  <strong>{{'#Price' | translate}}: </strong>
+                  <span class="float-right">¥ {{foodDatas.price}}</span>
+                </p>
+                <p class="detail-price-list">
+                  <strong>{{'#Commission' | translate}}: </strong>
+                  <span class="float-right"> ¥ {{getRound(foodDatas.price/20)}}</span>
+                  <br>
+                </p>
+                <div class="price-line"></div>
+                <p class="detail-price-list">
+                  <strong>{{'#Total' | translate}}: </strong>
+                  <span class="float-right">¥ {{cartData.quantity*(foodDatas.price + getRound(foodDatas.price/20))}}</span>
+                </p>
+              </div>
+              <!-- price -->
+              <div class="f-comments" style="margin-bottom: 30px">
+                <p>{{'#FoodComment1' | translate}}</p>
+                <p>{{'#FoodComment2' | translate}}</p>
+                <p>{{'#FoodComment3' | translate}}</p>
+                <p class="fdbigcomment">{{'#DeliverableArea' | translate}} : {{foodDatas.deliverable_area}}</p>
+                <p class="fdbigcomment">{{'#DeliveryDate' | translate}} : {{foodDatas.date_of_availability}}</p>
+              </div>
+              <!-- contact-with -->
+              <div *ngIf="foodDatas.food_status != 0" class="contact-with">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select [(ngModel)]="delivertime" class="form-control" name="slot">
+                      <option value="">{{'#SelectYourTime' | translate}}</option>
+                      <option *ngFor="let titem of foodDatas.time_of_availability; let j=index" value="{{j}}">{{titem}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" style="height: 44px;">
+                    <span class="qty_box">{{'#QTY' | translate}}</span>
+                    <select [(ngModel)] = "cartData.quantity" style="display: inherit;" class="form-control quantity_box" name="quantity">
+                      <option *ngFor="let qitem of quantity_array" value="{{qitem}}">{{qitem}}</option>
+                    </select>
+                    <!--input [(ngModel)] = "cartData.quantity" style="display: inherit;" type="number" class="form-control quantity_box" placeholder="Quantity" name="quantity"/-->
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="checkToken()" class="contact-with">
+                <!--div class="col-md-6">
+                  <button [disabled]="foodDatas.food_status == 0" (click)="doBuy()" id="buy_now_btn" class="btn btn-red detail-buy-btn makeOrder" type="button">{{'#BuyNow' | translate}}</button>
+                </div-->
+                <div *ngIf="foodDatas.food_status != 0" class="col-md-12">
+                  <button (click)="addToCart(1)" id="buy_now_btn" class="btn btn-red detail-buy-btn makeOrder" type="button">{{'#AddToCart' | translate}}</button>
+                </div>
+                <div *ngIf="foodDatas.food_status == 0" class="col-md-12">
+                  <button disabled (click)="addToCart(1)" id="buy_now_btn" class="btn btn-red detail-buy-btn makeOrder" type="button">Out of Order</button>
+                </div>
+              </div>
+              <div [hidden]="!checkToken()" class="contact-with">
+                <div class="col-md-12">
+                  <button (click)="goToLogin()" id="buy_now_btn" class="btn btn-red detail-buy-btn makeOrder" type="button">{{'#LoginToBuy' | translate}}</button>
+                </div>
+              </div>
+              <p>{{'#FoodComment4' | translate}}</p>
+          </div>
+        </div>
+        <!-- slider-text -->
+      </div>
+    </div>
+    <!-- slider -->
+
+    <div class="description-info">
+      <div class="row">
+        <!-- description -->
+        <div class="col-md-8">
+          <div class="col-lg-12 col-12 description description-main-div float-left">
+            <div class="col-md-3">
+              <div class="">
+                <a routerLink="{{'/profile/' + foodDatas.offered_by}}">
+                  <img *ngIf="(foodDatas.image == '')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-circle">
+                  <img *ngIf="(foodDatas.image != '' && foodDatas.image != undefined)" src="{{serverUrl + '/' + foodDatas.image}}" class="img-circle">
+                </a>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="">
+                <h4>{{'#Description' | translate}}</h4>
+                <p style="white-space: pre-line;">{{foodDatas.food_description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- description -->
+
+        <!-- description-short-info -->
+        <div class="col-md-4">
+          <div class="short-info detail-short-info">
+            <h4>{{'#SomeInformation' | translate}}</h4>
+            <!-- social-icon -->
+            <ul>
+              <li>
+                <i class="fa fa-shopping-cart"></i>
+                <a href="#">{{'#RegularPurchase' | translate}}: &nbsp;{{'#Preparing' | translate}}</a>
+              </li>
+              <li><i class="fa fa-heart-o"></i>
+                <a href="#">{{'#PartyOrder' | translate}}: &nbsp;{{'#Preparing' | translate}}</a>
+              </li>
+              <!--li>
+                <i class="fa fa-user"></i>
+                <a href="#">{{foodDatas.user_description}}</a>
+              </li-->
+            </ul>
+            <!-- social-icon -->
+          </div>
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- description-info -->
+
+    <div class="reviews-info">
+      <div class="row">
+        <div class="col-md-8">
+            <div class="col-lg-12">
+                <h4 style="margin-bottom: 20px; font-weight: 500;">{{"#Reviews" | translate}}</h4>
+                <div *ngFor="let reviewitem of reviewDatas;" class="each_review">
+                  <!--
+                                      <rating [(ngModel)]="reviewitem.ratings" [max]="5" [readonly]="true"></rating>&nbsp;&nbsp;&nbsp;{{reviewitem.review}}
+                                      -->
+                  <div class="review_contents">
+                    <a class="reviewed_food" routerLink="{{'/food-detail/' + reviewitem.food_id}}">{{reviewitem.food_title}}</a>
+                    <p class="review_description">{{reviewitem.review_description}}</p>
+                    <div class="rdatepanel">
+                      <span style="color: #5d5d5d; font-style: italic;">{{"#reviewedfrom" | translate}} : </span>
+                      <span style="color: #f56b2d; font-weight: 700;">{{reviewitem.nick_name}}</span>
+                    </div>
+                  </div>
+                  <div class="rater">
+                    <span style="color: #f56b2d; font-weight: 700;">{{reviewitem.date_of_submission}}</span>
+                  </div>
+                </div>
+                <div *ngIf="current_rDatas.length!=0" style="text-align: right; margin-top: 20px;">
+                  <span (click)="loadReviews()" style="color: #f56b2d; font-weight: 700; cursor: pointer;">{{"#more" | translate}}</span>
+                </div>
+                <div *ngIf="reviewDatas.length == 0" class="text-center">
+                  <h4>{{'#NoReviews' | translate}}</h4>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section cta text-center">
+      <div class="row">
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-secure">
+              <img src="assets/frontend/images/a1.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+
+            <h4>{{'#DeliciousFoods' | translate}}</h4>
+            <p>{{"#DeliciousFoods_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-support">
+              <img src="assets/frontend/images/a2.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+
+            <h4>{{'#DeliveryonTime' | translate}}</h4>
+            <p>{{"#DeliveryonTime_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-trading">
+              <img src="assets/frontend/images/a3.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+
+            <h4>{{'#ReasonablePrice' | translate}}</h4>
+            <p>{{"#ReasonablePrice_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- recommended-info -->
+  </div>
+  <!-- container -->
+</section>
+<!-- main -->
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

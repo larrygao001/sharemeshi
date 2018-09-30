@@ -1,0 +1,13 @@
+.p-0{
+	padding: 0;
+}
+.timetable-btn{
+	float: right;
+}
+.start-time-id {
+    width: 100%;
+    display: inline-block;
+}
+.t-red{
+	color: red;
+}

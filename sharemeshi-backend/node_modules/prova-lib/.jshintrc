@@ -1,0 +1,11 @@
+{
+  "forin": true,             // requires all for (key in obj) style loops to filter object's items
+  "latedef": true,           // prohibits the use of a variable before bring defined
+  "curly": true,             // requires curly braces around loop and conditional blocks
+  "moz": true,               // tells JSHint that code uses Mozilla JavaScript extensions
+  "node": true,              // defines globals available when running in node environment
+  "unused": true,            // warns when variables are defined but never used
+  "predef": [ "-Promise" ],  // don't warn when Bluebird Promise overrides node.js global Promise
+  "mocha": true,             // don't warn about mocha global functions like "describe", "after", "before", "it"
+  "esversion": 6             // code supports ECMAScript 6 (includes the arrow function syntax =>)
+}

@@ -1,0 +1,150 @@
+.mb-0{
+	margin-bottom: 0;
+}
+.mt-0{
+	margin-top: 0;
+}
+.t-black{
+	color: #000;
+}
+.p-0{
+	padding: 0;
+}
+.float-right{
+	float: right;
+}
+.float-left{
+	float: left;
+}
+.text-left{
+	text-align: left;
+}
+.feature-over-person{
+    position: absolute;
+    top: -8%;
+    left: -5%;
+}
+.feature-over-person img{
+	border-radius: 50%;
+    border: 4px solid #f26522;
+}
+.item-title a{
+	text-decoration: none !important;
+}
+.detail-buy-btn{
+	padding: 10px;
+    min-width: 100%;
+}
+.description-main-div{
+	padding: 20px 30px;
+}
+.detail-price-list{
+	width: 65%;
+}
+.detail-short-info li{
+	margin-bottom: 24px;
+}
+.price-line{
+	width: 65%;
+    height: 1px;
+    background-color: #eee;
+    margin: 11px 0px;
+}
+/* start profile page */
+.profile-title{
+	color: #f26522;
+    margin: 18px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile-timeline{
+	float: none;
+	display: inline-block;
+}
+.timeline-numbers{
+	color: #f26522;
+    font-size: 39px;
+    font-weight: 400;
+}
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+.profile-section{
+	padding: 35px 25px;
+}
+.profile-box{
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 25px;
+}
+.profile-description{
+	border-top: 1px solid #eee;
+    padding: 28px 0px 28px 0px;;
+}
+.profile-vedio{
+	position: relative;
+}
+.profile-vedio-btn{
+	position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+}
+.review-image{
+	border: 3px solid #f26522;
+}
+.review-main-div{
+	margin-bottom: 18px;
+}
+.message-logo-div{
+	padding-left: 0;
+}
+/* end profile page */
+.images-featured{
+  height: 200px;
+}
+.profile-images{    
+  height: 200px;   
+  width: 200px;
+}
+.feature-over-image{
+  height: 80px; 
+  width:80px !important;
+}
+.form-custom-group{
+  text-align: left;
+}
+.t-red{
+  color: red;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder{
+  color: #ccc !important;
+}
+.seller input,
+.buyer input{
+  height: 16px;
+  margin-bottom: 0px;
+}
+.register-checktext{
+  vertical-align: text-bottom;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+} 
+body { 
+  top: 0px !important; 
+}

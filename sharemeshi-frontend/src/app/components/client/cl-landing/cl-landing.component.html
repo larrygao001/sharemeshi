@@ -1,0 +1,287 @@
+<section id="main" class="clearfix home-two">
+  <div class="landingbg">
+    <img src="assets/frontend/images/sharemeshi_catch.png" alt="" class="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <!-- banner -->
+      <div class="col-sm-12">
+        <div class="banner">
+          <!-- banner-form -->
+          <!--div class="banner-form banner-form-full">
+            <form action="#">
+              <div class="dropdown category-dropdown">
+                <a data-toggle="dropdown" href="#">
+                  <span id="mycategory" class="change-text">{{"#SelectCategory" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu category-change">
+                  <li>
+                    <a (click)="setCategory(1000 , 'Select Category')">{{"#SelectCategory" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCategory(1 , 'Trial')">{{"Trial" | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="dropdown category-dropdown language-dropdown ">
+                <a data-toggle="dropdown" href="#">
+                  <span id="mycountry" class="change-text">{{"#SelectCountry" | translate}}</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu  language-change">
+                  <li>
+                    <a (click)="setCountry('none', 'Select Country')">{{"#SelectCountry" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Japan', 'Japan')">{{"Japan" | translate}}</a>
+                  </li>
+                  <li>
+                    <a (click)="setCountry('Other', 'Other')">{{"Other" | translate}}</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <input type="text" class="form-control" [(ngModel)]="model.keyword" name="text" placeholder="Type Your key word">
+              <button class="form-control" value="Search" (click)="doFilter()">{{"#Search" | translate}}</button>
+            </form>
+          </div-->
+          <!-- banner-form -->
+        </div>
+      </div>
+      <!-- banner -->
+    </div>
+    <!-- row -->
+
+    <div class="row">
+      <p class="brief_introduce">
+         {{"#BriefIntroduce" | translate}}
+      </p>
+    </div>
+
+    <div class="col-lg-12 col-xs-12 text-center beginner-btn-box">
+      <a routerLink="/begineer-tutorial" class="btn back-orange beginner-guide-btn">{{'#BeginnerTutorial' | translate}}</a>
+      <p></p>
+      <a *ngIf="checkLogined()" routerLink="/register" class="btn back-orange beginner-guide-btn">{{'#Register' | translate}}</a>
+    </div>
+
+    <!-- cta -->
+    <div class="section cta text-center">
+      <div class="row">
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-secure">
+              <img src="assets/frontend/images/a1.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+            <h4>{{'#DeliciousFoods' | translate}}</h4>
+            <p>{{"#DeliciousFoods_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+    
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-support">
+              <img src="assets/frontend/images/a2.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+            <h4>{{'#DeliveryonTime' | translate}}</h4>
+            <p>{{"#DeliveryonTime_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+    
+        <!-- single-cta -->
+        <div class="col-sm-4">
+          <div class="single-cta">
+            <!-- cta-icon -->
+            <div class="cta-icon icon-trading">
+              <img src="assets/frontend/images/a3.png" alt="Icon" class="img-responsive">
+            </div>
+            <!-- cta-icon -->
+            <h4>{{'#ReasonablePrice' | translate}}</h4>
+            <p>{{"#ReasonablePrice_contents" | translate}}</p>
+          </div>
+        </div>
+        <!-- single-cta -->
+      </div>
+    </div>
+    <!-- cta -->
+
+    <div class="section featureds">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="featured-top">
+            <h4>{{"#NewsList" | translate}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="news-list">
+        <ul>
+          <li *ngFor="let nitem of newsArray;">
+            <span class="news-date">{{nitem.date}}</span>
+            <span>
+              <a routerLink="{{'/news-detail/' + nitem.news_id}}" class="t-black">
+                {{nitem.title}}
+              </a>
+            </span>
+            <span *ngIf="nitem.highlight == 1" class="new_tag">{{"#New" | translate}}</span>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="newsmoreflag == 0" class="row" style="text-align: right; margin-bottom: 20px;">
+        <span (click)="loadNews()" style="font-weight: 700; font-size: 17px; color: #f36525; cursor: pointer;">{{"#more" | translate}}</span>
+      </div>
+    </div>
+
+    <div class="section featureds">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="featured-top">
+            <h4>{{"#AvaiableList" | translate}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let tditem of availableDatas; let i=index;">
+          <div class="clearfix" *ngIf="i % 4 == 0"></div>
+          <div class="col-md-3 col-lg-3">
+            <div class="featured">
+              <div class="featured-image">
+                <a routerLink="{{'/food-detail/' + tditem.food_item_id}}">
+                  <img *ngIf="tditem.food_images.length == 0" src="assets/img/blank.png" alt="" class="img-respocive foodcard_fixed">
+                  <img *ngIf="tditem.food_images.length != 0" src="{{serverUrl + '/' + tditem.food_images[0]}}" alt="" class="img-respocive foodcard_fixed">
+                </a>
+                <a routerLink="{{'/profile/' + tditem.offered_by}}">
+                  <div class="feature-over-person">
+                    <img *ngIf="(tditem.profile_image == '')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-responsive">
+                    <img *ngIf="(tditem.profile_image != '')" src="{{serverUrl + '/' +tditem.profile_image}}" class="img-responsive">
+                  </div>
+                </a>
+              </div>
+              <div class="ad-info" style="cursor: pointer;" (click)="goToFoodDetails('/food-detail/' + tditem.food_item_id)">
+                <h3 class="item-price">&yen;{{tditem.price}}</h3>
+                <h4 class="item-title card_truncated">{{tditem.item_name}}</h4>
+                <div class="item-cat">
+                  <span>{{tditem.category_name}}</span>
+                  <span *ngIf="tditem.area != ''" class="mkg-home-category-area mkg-t-orange">{{tditem.area}}</span>
+                </div>
+              </div>
+              <div class="ad-meta">
+                <div class="meta-content">
+                  <span class="dated">{{tditem.date_of_availability}}, {{tditem.availability_day | translate}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tong" [hidden]="availableDatas.length != 0" style="text-align: center;">
+          <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+          <h3 style="color: #f26522;">{{'#emptyFoods' | translate}}</h3>
+        </div>
+      </div>
+      <div class="row hidden" style="text-align: right; margin-bottom: 20px;">
+          <span style="font-weight: 700; font-size: 17px; color: #f36525; cursor: pointer;" (click)="goToMoreFoods(0)">{{"#more" | translate}}</span>
+      </div>
+    </div>
+
+    <div class="section featureds" style="padding: 30px;">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="featured-top">
+            <h4>{{"#ClosedOrders" | translate}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let tditem of closedDatas; let i=index;">
+          <div class="clearfix" *ngIf="i % 4 == 0"></div>
+          <div class="col-md-3 col-lg-3">
+            <div class="featured">
+              <div class="featured-image">
+                <a routerLink="{{'/food-detail/' + tditem.food_item_id}}">
+                  <img *ngIf="tditem.food_images.length == 0" src="assets/img/blank.png" alt="" class="img-respocive foodcard_fixed">
+                  <img *ngIf="tditem.food_images.length != 0" src="{{serverUrl + '/' + tditem.food_images[0]}}" alt="" class="img-respocive foodcard_fixed">
+                </a>
+                <a routerLink="{{'/profile/' + tditem.offered_by}}">
+                  <div class="feature-over-person">
+                    <img *ngIf="(tditem.profile_image == '')" src="assets/uploads/profile/picture/user_picture1521871242.jpg" class="img-responsive">
+                    <img *ngIf="(tditem.profile_image != '')" src="{{serverUrl + '/' +tditem.profile_image}}" class="img-responsive">
+                  </div>
+                </a>
+              </div>
+              <div class="ad-info" style="cursor: pointer;" (click)="goToFoodDetails('/food-detail/' + tditem.food_item_id)">
+                <h3 class="item-price">&yen;{{tditem.price}}</h3>
+                <h4 class="item-title card_truncated">{{tditem.item_name}}</h4>
+                <div class="item-cat">
+                  <span>{{tditem.category_name}}</span>
+                  <span *ngIf="tditem.area != ''" class="mkg-home-category-area mkg-t-orange">{{tditem.area}}</span>
+                </div>
+              </div>
+              <div class="ad-meta">
+                <div class="meta-content">
+                  <span class="dated">{{tditem.date_of_availability}}, {{tditem.availability_day | translate}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="tong" [hidden]="closedDatas.length != 0" style="text-align: center;">
+          <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+          <h3 style="color: #f26522;">{{'#emptyFoods' | translate}}</h3>
+        </div>
+      </div>
+      <div class="row hidden" style="text-align: right; margin-bottom: 20px;">
+        <span style="font-weight: 700; font-size: 17px; color: #f36525; cursor: pointer;" (click)="goToMoreFoods(1)">{{"#more" | translate}}</span>
+      </div>
+    </div>
+
+    <!-- featureds -->
+    <div class="section featureds" style="padding: 30px;">
+      <h3 style="text-align: center; margin-bottom: 50px;">{{"#EaterTestimonial" | translate}}</h3>
+      <img src="./assets/frontend/images/sharemeshi_eater_reviews.png" alt="" class="">
+    </div>
+    <!-- featureds -->
+
+    <!-- featureds -->
+    <div class="section featureds" style="padding: 30px;">
+      <h3 style="text-align: center; margin-bottom: 50px;">{{"#CreatorTestimonial" | translate}}</h3>
+      <img src="./assets/frontend/images/sharemeshi_creator_reviews.png" alt="" class="">
+    </div>
+    <!-- featureds -->
+  </div>
+  <!-- container -->
+  <!-- gmap -->
+  <!--div id="road_map"></div-->
+</section>
+<!-- world-gmap -->
+
+<script type="text/javascript">
+  var url = "assets/frontend/images/";
+
+  "use strict";
+  /* global document */
+  jQuery(document).ready(function () {
+    /***
+     Adding Google Map.
+    ***/
+
+    /* Calling goMap() function, initializing map and adding markers. */
+    
+  });
+
+  // -------------------------------------------------------------
+  //   Google Map 
+  // -------------------------------------------------------------  
+
+  (function () {
+
+    
+  }()); 
+</script>
+

@@ -1,0 +1,279 @@
+<section id="main" class="clearfix cartlist-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+      <!-- breadcrumb -->
+      <ol class="breadcrumb">
+        <li>
+          <a routerLink="/">{{'#Home' | translate}}</a>
+        </li>
+        <li>{{"#OrderDetail" | translate}}</li>
+      </ol>
+      <!-- breadcrumb -->
+      <h2 class="title">{{"#OrderDetail" | translate}}</h2>
+    </div>
+  </div>
+  <div class="section container">
+      <div class="order-tabs row">
+        <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 upcome">
+          <span [class.tactive]="clickedTab==1" [class.utactive]="clickedTab!=1" (click)="clickedTabEvent(1)">{{"#UpcomingOrders" | translate}}</span>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <span [class.tactive]="clickedTab==2" [class.utactive]="clickedTab!=2" (click)="clickedTabEvent(2)">{{"#PreviousOrders" | translate}}</span>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3"></div>
+      </div>
+
+      <div class="row" style="text-align: right;">
+        <button class="btn refresh_btn" (click)="reloadDatas()"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Refresh" | translate}}</button>
+      </div>
+
+      <div *ngFor="let upfitem of UppaginatedDatas" [hidden]="clickedTab!=1" class="mkg-food-panel row">
+        <div class="msubpanel col-lg-3 col-md-3 col-sm-3">
+          <img *ngIf="upfitem.food_images == '' || upfitem.food_images.length == 0" style="cursor: pointer;" (click)="goToFoodDetails(upfitem.food_item_id)" class="img-responsive" src="assets/img/blank.png">
+          <img *ngIf="upfitem.food_images != '' && upfitem.food_images.length != 0" style="cursor: pointer;" (click)="goToFoodDetails(upfitem.food_item_id)" class="img-responsive" src="{{serverUrl + '/' + upfitem.food_images[0]}}">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h3 style="cursor: pointer;" (click)="goToFoodDetails(upfitem.food_item_id)" class="mkg-food-title">{{upfitem.item_name}}</h3>
+          <h4 class="mkg-food-sn">
+            <span class="oderid_title">{{"#OrderNumber" | translate}}</span> - {{upfitem.order_number}}
+          </h4>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#Price" | translate}} : </span>&nbsp;&nbsp;&nbsp;¥{{upfitem.price}}</h4>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#Quantity" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.requested_quantity}}</h4>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#DeliveryDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.date_of_delivery}}</h4>
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#OrderedBy" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.nick_name}}</h4>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#DeliveryTime" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.time}}</h4>
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#OrderDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{getOrderDate(upfitem.created_at)}}</h4>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <h4 class="mkg-dd">
+                  <span class="dtime">{{"#Shippingaddress" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.shipping_address}}</h4>
+              </div>
+              <!--div class="col-lg-12 col-md-12 col-sm-12">
+                <h4 class="mkg-dd" *ngIf="upfitem.reviewed != 1">
+                  <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{upfitem.deliver_status}}</h4>
+                <h4 class="mkg-dd" *ngIf="upfitem.reviewed == 1">
+                  <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;Reviewed</h4>
+              </div-->
+          </div>
+        </div>
+        <div class="mrightpanel col-lg-3 col-md-3 col-sm-3">
+          <h3 class="mkg-total">{{"#TotalPrice" | translate}} &nbsp;
+            <span class="totalprice">¥{{upfitem.food_total_amount}}</span>
+          </h3>
+          <div class="btnpanel">
+            <button (click)="goToChat(upfitem.chat_id, upfitem.order_number)" class="btn reviewBtn">
+              <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;{{"#Chat" | translate}}
+            </button>
+            <span *ngIf="upfitem.unread_message_count != 0" class="msg_span">{{upfitem.unread_message_count}}</span>
+          </div>
+          <button class="btn eaterInfoBtn" (click)="openEaterInfo(EaterInfo, upfitem.eater_info)">
+            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;{{"#EaterInfo" | translate}}
+          </button>
+          
+        </div>
+      </div>
+
+      <div *ngFor="let prefitem of PrepaginatedDatas" [hidden]="clickedTab!=2" class="mkg-food-panel row">
+        <div class="msubpanel col-lg-3 col-md-3 col-sm-3">
+          <img *ngIf="prefitem.food_images == '' || prefitem.food_images.length == 0" style="cursor: pointer;" (click)="goToFoodDetails(prefitem.food_item_id)" class="img-responsive" src="assets/img/blank.png">
+          <img *ngIf="prefitem.food_images != '' && prefitem.food_images.length != 0" style="cursor: pointer;" (click)="goToFoodDetails(prefitem.food_item_id)" class="img-responsive" src="{{serverUrl + '/' + prefitem.food_images[0]}}">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h3 style="cursor: pointer;" (click)="goToFoodDetails(prefitem.food_item_id)" class="mkg-food-title">{{prefitem.item_name}}</h3>
+          <h4 class="mkg-food-sn">
+            <span class="oderid_title">{{"#OrderNumber" | translate}}</span> - {{prefitem.order_number}}
+          </h4>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#Price" | translate}} : </span>&nbsp;&nbsp;&nbsp;¥{{prefitem.price}}</h4>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#Quantity" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{prefitem.requested_quantity}}</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#DeliveryDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{prefitem.date_of_delivery}}</h4>
+              <!--h4 class="mkg-dd" *ngIf="prefitem.reviewed != 1">
+                <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{prefitem.deliver_status}}</h4>
+              <h4 class="mkg-dd" *ngIf="prefitem.reviewed == 1">
+                <span class="dtime">{{"#Status" | translate}} : </span>&nbsp;&nbsp;&nbsp;Reviewed</h4-->
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#DeliveryTime" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{prefitem.time}}</h4>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#OrderDate" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{getOrderDate(prefitem.created_at)}}</h4>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h4 class="mkg-dd">
+                <span class="dtime">{{"#OrderedBy" | translate}} : </span>&nbsp;&nbsp;&nbsp;{{prefitem.nick_name}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="mrightpanel col-lg-3 col-md-3 col-sm-3">
+          <h3 class="mkg-total">{{"#TotalPrice" | translate}} &nbsp;
+            <span class="totalprice">¥{{prefitem.food_total_amount}}</span>
+          </h3>
+          <p *ngIf="prefitem.review_status != 0" class="t_reviewed">{{'#Reviewed' | translate}}</p>
+          <button *ngIf="prefitem.review_status == 0" (click)="openModal(PreviousOrderReview, 2, prefitem.order_id, prefitem.food_item_id)" class="btn PrevreviewBtn">{{"#Review" | translate}}</button>
+          <p></p>
+          <button *ngIf="prefitem.review != ''" class="btn rpbtn" (click)="openReviewPreview(ReviewPreview, prefitem.review)">
+            {{"#ReviewFromEater" | translate}}
+          </button>
+        </div>
+      </div>
+
+      <div id="emptybox" *ngIf="PrepaginatedDatas.length == 0" [hidden]="clickedTab!=2" style="text-align: center;">
+        <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+        <h3 style="color: #f26522;">{{'#OopsOrderEmpty' | translate}}</h3>
+        <h4>{{'#OopsOrderEmptyContent' | translate}}</h4>
+        <button (click)="goToFoodList()" class="btn cartsbtn" style="min-width: 150px !important; height: 50px;" type="button">{{'#ContinueShopping' | translate}}</button>
+      </div>
+
+      <div id="emptybox" *ngIf="UppaginatedDatas.length == 0" [hidden]="clickedTab!=1" style="text-align: center;">
+        <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+        <h3 style="color: #f26522;">{{'#OopsOrderEmpty' | translate}}</h3>
+        <h4>{{'#OopsOrderEmptyContent' | translate}}</h4>
+        <button (click)="goToFoodList()" class="btn cartsbtn" style="min-width: 150px !important; height: 50px;" type="button">{{'#ContinueShopping' | translate}}</button>
+      </div>
+
+      <div class="text-center">
+        <ul class="pagination ">
+          <li>
+            <a (click)="clickedCaret(0)">
+              <i class="fa fa-backward"></i>
+            </a>
+          </li>
+          <li>
+            <a (click)="clickedCaret(1)">
+              <i class="fa fa-chevron-left"></i>
+            </a>
+          </li>
+          <li *ngFor="let pwidget of paginateWidgets;" [class.active]='paginateActive == pwidget'>
+            <a (click)="clickedPaginate(pwidget)">{{pwidget}}</a>
+          </li>
+          <li>
+            <a (click)="clickedCaret(2)">
+              <i class="fa fa-chevron-right"></i>
+            </a>
+          </li>
+          <li>
+            <a (click)="clickedCaret(3)">
+              <i class="fa fa-forward"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+  </div>
+</section>
+
+<ng-template #ReviewPreview>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left review-header">{{"#ReviewFromEater" | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+    <div class="col-lg-3 col-md-3 col-sm-3" style="text-align: center;">
+      <img *ngIf="rpReviewObj.image != ''" src="{{serverUrl + '/' + rpReviewObj.image}}" class="eater_img" />
+      <img *ngIf="rpReviewObj.image == ''" src="assets/uploads/profile/picture/user_picture1520431121.png"
+        class="eater_img" />
+     
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9">
+      <p style="white-space: pre-line;">{{rpReviewObj.message}}</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #EaterInfo>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left review-header">{{"#EaterInfo" | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+      <div class="col-lg-3 col-md-3 col-sm-3" style="text-align: center;">
+        <img *ngIf="eaterBriefInfo.image != ''" src="{{serverUrl + '/' + eaterBriefInfo.image}}" class="eater_img" />
+        <img *ngIf="eaterBriefInfo.image == '' && eaterBriefInfo.gender == '0'" src="assets/uploads/profile/picture/user_picture1520431121.png" class="eater_img" />
+        <img *ngIf="eaterBriefInfo.image == '' && eaterBriefInfo.gender == '1'" src="assets/uploads/profile/picture/user_picture1520431158.png"
+          class="eater_img" />
+          <img *ngIf="eaterBriefInfo.image == '' && eaterBriefInfo.gender == '2'" src="assets/uploads/profile/picture/user_picture1521869585.png"
+            class="eater_img" />
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9">
+        <label>{{"#Name" | translate}} : </label> {{eaterBriefInfo.name}}
+        <p></p>
+        <label>{{"#NickName" | translate}} : </label> {{eaterBriefInfo.nick_name}}
+        <p></p>
+        <label>{{"#PhoneNumber" | translate}} : </label> {{eaterBriefInfo.phone_number}}
+        <p></p>
+        <label>{{"#Gender" | translate}} : </label> {{getGenderStr(eaterBriefInfo.gender) | translate}}
+        <p></p>
+        <label>{{"#Age" | translate}} : </label> {{eaterBriefInfo.age}}
+        <p></p>
+        <label>{{"#Introduction" | translate}} : </label> 
+        <p style="white-space: pre-line;">{{eaterBriefInfo.introduction}}</p>
+
+      </div>
+  </div>
+</ng-template>
+
+<ng-template #PreviousOrderReview>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left review-header">{{"#GiveaReview" | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+    <div class="col-lg-1 col-md-1 col-sm-1">
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 reviewbody">
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+          <h3>{{"#Communication" | translate}}</h3>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <rating style="margin-top: 3px;" [(ngModel)]="PreviousreviewObj.communication_ratings" [max]="5" [readonly]="false"></rating>
+        </div>
+      </div>
+      <div>
+        <textarea style="margin-top: 30px;" [(ngModel)]="PreviousreviewObj.communication_description" placeholder="Enter Your Description"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1">
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align: center;">
+    <button (click)="doSubmitReview(2)" class="btn submitReviewBtn">{{"#Submit" | translate}}</button>
+  </div>
+</ng-template>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

@@ -1,0 +1,76 @@
+<section id="main" class="clearfix cartlist-page">
+  <div class="container">
+    <div class="breadcrumb-section">
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <li>
+                <a routerLink="/">{{'#Home' | translate}}</a>
+            </li>
+            <li>{{'#CartList' | translate}}</li>
+        </ol>
+        <!-- breadcrumb -->
+        <h2 class="title">{{'#CartList' | translate}}</h2>
+    </div>
+  </div>
+  <div class="section container">
+
+      <div [hidden]="cartDatas.length != 0" style="text-align: center;">
+          <img src="./assets/frontend/images/emptycart.png" class="img-responsive" />
+          <h3 style="color: #f26522;">{{'#OopsCartEmpty' | translate}}</h3>
+          <h4>{{'#OopsCartEmptyContent' | translate}}</h4>
+          <button (click)="goToFoodList()" class="btn cartsbtn" style="min-width: 150px !important; height: 50px;" type="button">{{'#ContinueShopping' | translate}}</button>
+      </div>
+
+      <!--div [hidden]="checkChanges()">
+            <h5 style="color: #f26522;">The Cart can be only updated by clicking the update button</h5>
+      </div-->
+
+      <div [hidden]="citem.quantity==0" *ngFor="let citem of cartDatas; let i=index" class="mkg-food-panel row">
+          <div *ngIf="citem.food_details != undefined">
+            <div class="msubpanel col-lg-3 col-md-3 col-sm-3">
+                <img *ngIf="citem.food_details.food_images.length == 0 || citem.food_details.food_images == undefined || citem.food_details.food_images == ''" class="img-responsive" style="margin-top: 0px;" src="assets/img/blank.png">
+                <img *ngIf="citem.food_details.food_images != undefined && citem.food_details.food_images != '' && citem.food_details.food_images.length != 0" class="img-responsive" style="margin-top: 0px;" src="{{serverUrl + '/' +citem.food_details.foodImages[0]}}">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <h3 class="mkg-food-title">{{citem.food_details.item_name}}</h3>
+                <h4 class="mkg-food-sn">{{'#MoreFoodsBy' | translate}} <span class="username">{{citem.offeror_nick_name}}</span></h4>
+                <h4 class="mkg-dd"><span class="dtime">{{'#Price' | translate}} : </span>&nbsp;&nbsp;&nbsp;¥{{citem.food_details.price}}</h4>
+                <h4 class="mkg-dd"><span class="dtime">{{'#Commission' | translate}} : </span>&nbsp;&nbsp;&nbsp;¥{{getRound(citem.food_details.price/20)}}</h4>
+                <h4 class="mkg-dd"><span class="dtime">
+                    {{'#Quantity' | translate}} : </span>&nbsp;&nbsp;
+                    <!--span (click)="doPlus(i)" class="ar_btn"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                    &nbsp;&nbsp;{{citem.quantity}}&nbsp;&nbsp;
+                    <span (click)="doMinus(i)" class="ar_btn"><i class="fa fa-minus-circle" aria-hidden="true"></i></span-->
+                    <select class="ppselect" [(ngModel)]="citem.quantity" (change)="onChangeQuantity($event.target.value , i)">
+                        <option value="0">0</option>
+                        <option *ngFor="let ppqitem of citem.quantity_arr;" [selected]="citem.quantity == ppqitem" value="{{ppqitem}}">{{ppqitem}}</option>
+                    </select>
+                </h4>
+                <h4 class="mkg-dd"><span class="dtime">{{'#DeliveryTime' | translate}} : </span>&nbsp;&nbsp;&nbsp;{{citem.time}}</h4>
+            </div>
+            <div class="mrightpanel col-lg-3 col-md-3 col-sm-3">
+                <h3 class="mkg-total">{{'#TotalPrice' | translate}} &nbsp; <span class="totalprice">¥{{citem.price}}</span></h3>
+            </div>
+          </div>
+      </div>
+
+      <div [hidden]="cartDatas.length == 0" class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3" style="text-align: center;">
+
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 purchaseBtns" style="text-align: center;">
+              <!--button (click)="doOrderPlace()" class="btn cartsbtn" type="button">{{'#OrderPlace' | translate}}</button>
+              <div [hidden]="checkChanges()">
+                <button (click)="doUpdateCart(1)" class="btn cartsbtn" type="button">{{'#UpdateCart' | translate}}</button>
+              </div-->
+              <!--div style="margin-top: 20px;" id="paypal-button-container"></div-->
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3" style="text-align: center;">
+          
+          </div>
+      </div>
+
+  </div>
+</section>
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

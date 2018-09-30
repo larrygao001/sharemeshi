@@ -1,0 +1,56 @@
+.form-group{
+    text-align: left;
+}
+
+.help-block{
+    margin-top: -20px;
+}
+
+::placeholder {
+    color: rgba(82, 80, 80, 0.726);
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgba(82, 80, 80, 0.726);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgba(82, 80, 80, 0.726);
+}
+
+.preview_avatar{
+    width: 35%;
+    height: 80%;
+    float: right;
+}
+
+.avatar_input{
+    width: 60%;
+    float: left;
+}
+
+.DoneCrop{
+    width: 150px;
+    background-color: #f36525;
+    color: white;
+    margin-top: 30px;
+}
+
+.DoneCrop:hover{
+    width: 150px;
+    background-color: white;
+    color: #f36525;
+    border: solid 1px #f36525;
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}

@@ -1,0 +1,73 @@
+.d-inline-block {
+    display: inline-block;
+}
+
+.nav.beginner-nav-pill li {
+    margin: 0 6px;
+}
+
+.beginner-nav-pill.nav-pills>li.active>a, .beginner-nav-pill.nav-pills>li.active>a:focus, .beginner-nav-pill.nav-pills>li.active>a:hover{
+    background-color: #f26522;
+    color: #fff;
+}
+
+.nav.beginner-nav-pill li a {
+    border: 1px solid #f26522;
+    color: #f26522;
+    text-transform: none;
+    min-width: 120px;
+    border-radius: 4px;
+}
+
+
+.beginners-food-creator-title {
+    font-size: 22px;
+    font-weight: 100;
+}
+
+.beginner-step-title {
+    font-size: 20px;
+}
+
+.beginner-step-sub-text {
+    font-size: 16px;
+}
+
+.t-orange {
+    color: #f26522;
+}
+
+.beginner-step-description {
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 27px;
+}
+
+.beginner-right-img {
+    margin: auto;
+}
+
+
+.beginner-step-arrow-box {
+    padding: 28px 0px;
+}
+.beginner-arrow-down {
+    background-color: #f26522;
+    border-radius: 50%;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.beginner-guide-btn {
+    color: #fff;
+    min-width: 300px;
+    padding: 15px 10px;
+    background-color: #f26522 !important;
+}
+@media screen and (max-width: 768px) {
+    .beginner-guide-btn {
+        min-width: 250px;
+    }
+}

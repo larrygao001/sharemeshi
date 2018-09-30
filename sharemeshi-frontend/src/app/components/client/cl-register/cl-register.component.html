@@ -1,0 +1,47 @@
+<section id="" class="clearfix user-page">
+  <div class="container">
+    <div class="row text-center">
+      <!-- user-register -->
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="user-account">
+          <h2>{{'#UserRegister' | translate}}</h2>
+          <!-- form -->
+          <form name="form" (ngSubmit)="register.form.valid && this.doRegister()" #register="ngForm" validate>
+
+            <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !nick_name.valid }">
+              <label>{{'#NickName' | translate}} *</label>
+              <input placeholder="{{'#EnterNickname' | translate}}" type="text" class="form-control" name="nick_name" [(ngModel)]="model.nick_name" #nick_name="ngModel" required>
+              <div *ngIf="register.submitted && !nick_name.valid" class="help-block">{{'#NNRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !email.valid }">
+              <label>{{'#Email' | translate}} *</label>
+              <input placeholder="{{'#EnterEmail' | translate}}" type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required>
+              <div *ngIf="register.submitted && !email.valid" class="help-block">{{'#EmailRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !password.valid }">
+              <label>{{'#Password' | translate}} *</label>
+              <input placeholder="{{'#EnterPassword' | translate}}" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+              <div *ngIf="register.submitted && !password.valid" class="help-block">{{'#PasswordRequired' | translate}}</div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': register.submitted && !password_confirm.valid }">
+              <label>{{'#PasswordConfirmation' | translate}} *</label>
+              <input placeholder="{{'#EnterPasswordConfirm' | translate}}" type="password" class="form-control" name="password_confirm" [(ngModel)]="model.password_confirm" #password_confirm="ngModel" required>
+              <div *ngIf="register.submitted && !password_confirm.valid" class="help-block">{{'#PPRequired' | translate}}</div>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">{{'#Submit' | translate}}</button>
+          </form>
+        </div>
+      </div>
+      <!-- user-register -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>
+<!-- register-page -->
+
+<ng4-loading-spinner [threshold]="1000" [template]="loadTemplate" [loadingText]="''" [zIndex]="999"></ng4-loading-spinner>

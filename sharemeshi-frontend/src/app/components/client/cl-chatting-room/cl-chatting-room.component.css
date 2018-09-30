@@ -1,0 +1,133 @@
+.msgheader{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 40px 1px rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.backicon{
+    color: #f36524;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    cursor: pointer;
+}
+
+.refreshicon{
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f36524;
+    margin-top: 25px;
+}
+
+.backicon_title{
+    color: #f36524;
+    font-size: 18px;
+    margin-top: 9px;
+    margin-left: 25px;  
+    cursor: pointer;
+}
+
+.msgitem{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0), 0 2px 10px 0 rgba(0,0,0,.12);
+
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.m_date{
+    color: black;
+    font-size: 13px;
+}
+
+.userHead{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+}
+
+.m_username{
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.usermsg{
+    margin-top: -10px;
+}
+
+.msgitem .row{
+    padding-bottom: 20px;
+}
+
+.msgcontents{
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 30px;
+    padding-right: 10px;
+}
+/* width */
+.msgcontents::-webkit-scrollbar {
+    width: 10px;
+    
+}
+/* Track */
+.msgcontents::-webkit-scrollbar-track {
+    background: white; 
+    border-radius: 5px;
+}
+/* Handle */
+.msgcontents::-webkit-scrollbar-thumb {
+    background: #aeaeae; 
+    border-radius: 5px;
+}
+/* Handle on hover */
+.msgcontents::-webkit-scrollbar-thumb:hover {
+    background: #666666; 
+}
+
+
+.msginput {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0), 0 2px 10px 0 rgba(0,0,0,.12);
+    margin-top: 30px;
+}
+.msginput textarea{
+    width: 100%;
+    font-size: 16px;
+    height: 50px;
+    padding: 11px;
+    border: none;
+}
+
+.sendMsgBtn{
+    padding: 10px 15px;
+    background-color: #f26522;
+    color: #fff;
+    border: solid 1px #f26522;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.empty_chathistory{
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .usermsg{
+        padding: 0px 90px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .usermsg{
+        padding: 0px 15px;
+        margin-top: 75px;
+    }
+}

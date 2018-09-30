@@ -1,0 +1,161 @@
+.profile-description .col-md-3{
+    text-align: center;
+}
+
+#eachinfo{ 
+    border-right: 1px solid;
+    height: 20px;
+}
+
+.btn-red {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #f36d2d;
+    color: white;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-red:hover {
+    background-color: transparent;
+    color: #f36d2d;
+    border: 1px solid #f36d2d;
+}
+
+.profile-image-div{
+    margin-top: -180px;
+}
+
+.profile-image-div img {
+    width: 200px;
+    height: 200px;
+}
+
+@media only screen and (max-width: 992px) {
+    .profile-image-div img {
+        width: 180px;
+        height: 180px;
+    }
+    .profile-image-div{
+        margin-top: -140px;
+    }
+}
+
+@media only screen and (max-width: 586px) {
+    .profile-image-div img {
+        width: 120px;
+        height: 120px;
+    }
+    .profile-image-div{
+        margin-top: -90px;
+    }
+}
+
+@media only screen and (max-width: 408px) {
+    .profile-image-div img {
+        width: 100px;
+        height: 100px;
+    }
+    .profile-image-div{
+        margin-top: -90px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .profile-image-div img {
+        width: 80px;
+        height: 80px;
+    }
+    .profile-image-div{
+        margin-top: -60px;
+    }
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+rating{
+    color: #f46c2d;
+    font-size: 20px;
+}
+
+.rater{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.reviewed_food{
+    font-size: 17px;
+}
+
+.each_review{
+    border-top: solid 1px #dfdfdf;
+    border-bottom: solid 1px #dfdfdf;
+    padding: 10px;
+    text-align: left;
+}
+
+
+.profilecover-imgs {
+    position: relative;
+    height: 30em;
+    margin-top: -20px;
+}
+.profile-back {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 28.125em;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.nickPicMain {
+    padding: 24px 0px;
+}
+
+.profile-images {
+    height: 80px;
+    width: 80px;
+    box-shadow: 0 2px 11px 0 rgba(0,0,0,.16), 0 2px 8px 4px rgba(0,0,0,.12);
+    border: 4px solid #f26522;
+}
+
+.profile-title {
+    color: #f26522;
+    /* margin: 18px 0; */
+    font-size: 20px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.profileplace-name {
+    display: inline-block;
+}
+
+.profile-deliverable{
+    border-top: 3px solid #eee;
+}
+
+.profile-deliverable-area {
+    padding: 26px 0;
+}
+
+.peditbtnright{
+    text-align: right; 
+    padding: 0px 0px; 
+    margin-bottom: 30px;
+}

@@ -1,0 +1,74 @@
+***AWS Account***
+lottocryptocurrency@gmail.com
+Lot
+Lotocrypto2018
+
+
+1. Email sender
+Sendgrid
+jhmun216@gmail.com       jhmun216      a-wufshjdsus23-a
+
+2. SMS sender
+Twillo
+jhmun216@gmail.com     a-wufshjdsus-a
+
+3. google, facebook login
+-google
+	account - jhmun216@gmail.com
+	app name - LOTO
+-facebook
+	assemking@outlook.com
+	Messi123
+	app name - LOTO
+	app name - LOTO PROD
+
+4. firebase, twitter login
+-twitter
+	account - jhmun216@gmail.com
+-firebase
+	jhmun216@gmail.com
+	project name - LOTO-Twitter Auth
+
+*Recaptcha*
+https://www.google.com/recaptcha/admin#list
+account : jhmun216@gmail.com
+
+5. blockchain.com
+e11435e6-bbff-417f-ac9c-688cfcabf1e1
+a-wufshjdsus-a
+
+6. bigo.com - sub address
+jhmun216@gmail.com
+a-wufshjdsus-a
+
+token - v2xa895f97e438967e88fd7064329412d4f05350dae511c9c38962d774b655dcfe7 
+
+/***/
+TESTNET TRANJACTION CHECKING...
+https://live.blockcypher.com/btc-testnet/tx/0241be3e031b05b9dc1622f6790c0c6640f50828b06bc2c1c8ce812bbc76307a/
+free test bitcoin through testnet
+https://testnet.coinfaucet.eu/en/
+btc -> satoshi
+http://satoshitobitcoin.co/bitcoin-to-satoshi/
+
+/*live wallets*/
+- main james wallet (user)
+0.01717306 btc initially.
+
+1. wallet (admin's)
+privateKeyWIF : KzPYG8gUqmWTpUC1hnz9jv8fmCV8rzcNb6g6kFMJpbZyjzhyNQk2
+privateKey : 5e918cee3c47506f5a4d25412d86b14e95e21e3200132a26877a02e409f04f87
+address : 1PpXkicJKHyryooiWsjL1zgQWay36bJYXG
+
+2. registered user - jhmun216@gmail.com
+16Pcn4v62Z6zLfQE1GFtmiAGR94kYcBsF7
+8e0d156e2947b4dfb8e124fe07e715d75b83b7ef8be8e2923994e98e39615c05
+
+/*priority*/
+when withdraw : 
+minimum : 0.002
+low: 0.5%
+normal: 0.7%
+high: 1%
+
+
